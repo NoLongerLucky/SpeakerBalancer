@@ -1,0 +1,59 @@
+package com.example.speakerbalancer.activity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.speakerbalancer.R;
+import com.example.speakerbalancer.data.AppDatabase;
+import com.example.speakerbalancer.data.StoredConfig;
+
+public class NewConfiguration extends AppCompatActivity {
+    EditText name, systemType, roomLength, roomWidth;
+    Button confirm;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_configuration);
+
+        name = findViewById(R.id.name);
+        systemType = findViewById(R.id.systemType);
+        roomLength = findViewById(R.id.roomLength);
+        roomWidth = findViewById(R.id.roomWidth);
+        confirm = findViewById(R.id.confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveData();
+            }
+        });
+    }
+
+    private void saveData() {
+        String name_txt = name.getText().toString().trim();
+        String systemType_txt = systemType.getText().toString().trim();
+        double roomLength_txt = Double.parseDouble(roomLength.getText().toString());
+        double roomWidth_txt = Double.parseDouble(roomWidth.getText().toString());
+
+        StoredConfig storedConfig = new StoredConfig();
+
+        storedConfig.setName(name_txt);
+        storedConfig.setSystemType(systemType_txt);
+        storedConfig.setRoomLength(roomLength_txt);
+        storedConfig.setRoomWidth(roomWidth_txt);
+
+        AppDatabase.getDatabase(getApplicationContext());
+
+        name.setText("");
+        systemType.setText("");
+        roomLength.setText("");
+        roomWidth.setText("");
+
+        Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show();
+    }
+}
