@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Speaker Balancer</string>
+    <string name="new_config">New Configuration</string>
+    <string name="load_config">Load Configuration</string>
 </resources>
