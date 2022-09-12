@@ -11,10 +11,11 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract StoredConfigDao getDao();
     private static AppDatabase instance;
 
-    public static AppDatabase getDatabase(Context context) {
-        if (instance != null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, "DATABASE").build();
+    public static AppDatabase getDatabase(final Context context) {
+        if (instance == null) {
+            synchronized (AppDatabase.class) {
+                instance = Room.databaseBuilder(context, AppDatabase.class, "DATABASE").allowMainThreadQueries().build();
+            }
         }
         return instance;
     }

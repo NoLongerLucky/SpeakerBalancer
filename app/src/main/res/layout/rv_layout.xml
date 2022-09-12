@@ -13,20 +13,11 @@
         android:padding="10sp">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/name_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/phone"/>
+            android:text="@string/name" />
 
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10sp"
-            android:text="123456789"
-            android:textColor="#000"
-            android:textSize="14sp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -35,9 +26,34 @@
         android:padding="10sp">
 
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/systemType_load"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/systemType" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp">
+
+        <TextView
+            android:id="@+id/roomLength_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/roomLength" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp">
+
+        <TextView
+            android:id="@+id/roomWidth_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/roomWidth" />
     </RelativeLayout>
 
     <LinearLayout
@@ -48,14 +64,14 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/updateId"
+            android:id="@+id/edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10sp"
             android:layout_weight="1"
-            android:text="Update"
+            android:text="Edit"
             android:textColor="#fff"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/deleteId"

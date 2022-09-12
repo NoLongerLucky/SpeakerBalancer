@@ -1,5 +1,6 @@
 package com.example.speakerbalancer.data;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -7,6 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "config_table")
 public class StoredConfig {
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     public int id;
 
     @ColumnInfo(name = "name")
@@ -16,10 +18,10 @@ public class StoredConfig {
     public String systemType;
 
     @ColumnInfo(name = "room_length")
-    public double roomLength;
+    public int roomLength;
 
     @ColumnInfo(name = "room_width")
-    public double roomWidth;
+    public int roomWidth;
 
     public int getId() {
         return id;
@@ -45,19 +47,19 @@ public class StoredConfig {
         this.systemType = systemType;
     }
 
-    public double getRoomLength() {
+    public int getRoomLength() {
         return roomLength;
     }
 
-    public void setRoomLength(double roomLength) {
+    public void setRoomLength(int roomLength) {
         this.roomLength = roomLength;
     }
 
-    public double getRoomWidth() {
+    public int getRoomWidth() {
         return roomWidth;
     }
 
-    public void setRoomWidth(double roomWidth) {
+    public void setRoomWidth(int roomWidth) {
         this.roomWidth = roomWidth;
     }
 }

@@ -29,11 +29,16 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StoredConfigAdapter.ViewHolder holder, int position) {
-        holder.name.setText(list.get(position).getName());
-        holder.systemType.setText(list.get(position).getSystemType());
-        holder.roomLength.setText((int) list.get(position).getRoomLength());
-        holder.roomWidth.setText((int) list.get(position).getRoomWidth());
+    public void onBindViewHolder(@NonNull StoredConfigAdapter.ViewHolder holder, final int position) {
+        String name = context.getString(R.string.name) + ": " + list.get(position).getName();
+        String systemType = context.getString(R.string.systemType) + ": " + list.get(position).getSystemType();
+        String roomLength = context.getString(R.string.roomLength) + ": " + list.get(position).getRoomLength();
+        String roomWidth = context.getString(R.string.roomWidth) + ": " + list.get(position).getRoomWidth();
+
+        holder.name.setText(name);
+        holder.systemType.setText(systemType);
+        holder.roomLength.setText(roomLength);
+        holder.roomWidth.setText(roomWidth);
     }
 
     @Override
@@ -47,10 +52,10 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.name);
-            systemType = itemView.findViewById(R.id.systemType);
-            roomLength = itemView.findViewById(R.id.roomLength);
-            roomWidth = itemView.findViewById(R.id.roomWidth);
+            name = itemView.findViewById(R.id.name_load);
+            systemType = itemView.findViewById(R.id.systemType_load);
+            roomLength = itemView.findViewById(R.id.roomLength_load);
+            roomWidth = itemView.findViewById(R.id.roomWidth_load);
         }
     }
 }

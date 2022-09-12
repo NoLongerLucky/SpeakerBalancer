@@ -41,8 +41,8 @@ public class NewConfiguration extends AppCompatActivity {
         String roomWidth_txt = roomWidth.getText().toString();
 
         if (name_txt.length() > 0 && systemType_txt.length() > 0 && roomLength_txt.length() > 0 && roomWidth_txt.length() > 0) {
-            double roomLength_num = Double.parseDouble(roomLength.getText().toString());
-            double roomWidth_num = Double.parseDouble(roomWidth.getText().toString());
+            int roomLength_num = Integer.parseInt(roomLength.getText().toString());
+            int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
 
             StoredConfig storedConfig = new StoredConfig();
 
@@ -51,7 +51,7 @@ public class NewConfiguration extends AppCompatActivity {
             storedConfig.setRoomLength(roomLength_num);
             storedConfig.setRoomWidth(roomWidth_num);
 
-            AppDatabase.getDatabase(getApplicationContext());
+            AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
 
             name.setText("");
             systemType.setText("");
