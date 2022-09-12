@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,8 @@ import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
 
 public class NewConfiguration extends AppCompatActivity {
-    EditText name, systemType, roomLength, roomWidth;
+    EditText name, roomLength, roomWidth;
+    Spinner systemType;
     Button confirm;
 
     @Override
@@ -36,11 +38,11 @@ public class NewConfiguration extends AppCompatActivity {
 
     private void saveData() {
         String name_txt = name.getText().toString().trim();
-        String systemType_txt = systemType.getText().toString().trim();
+        String systemType_txt = systemType.getSelectedItem().toString().trim();
         String roomLength_txt = roomLength.getText().toString();
         String roomWidth_txt = roomWidth.getText().toString();
 
-        if (name_txt.length() > 0 && systemType_txt.length() > 0 && roomLength_txt.length() > 0 && roomWidth_txt.length() > 0) {
+        if (name_txt.length() > 0 && roomLength_txt.length() > 0 && roomWidth_txt.length() > 0) {
             int roomLength_num = Integer.parseInt(roomLength.getText().toString());
             int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
 
@@ -54,17 +56,16 @@ public class NewConfiguration extends AppCompatActivity {
             AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
 
             name.setText("");
-            systemType.setText("");
+            systemType.setSelection(0);
             roomLength.setText("");
             roomWidth.setText("");
 
             Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
         } else {
             String error_txt = getString(R.string.badInput);
-            if (!(name_txt.length() > 0)) error_txt += "\n" + name.getHint() + getString(R.string.noInput);
-            if (!(systemType_txt.length() > 0)) error_txt += "\n" + systemType.getHint() + getString(R.string.noInput);
-            if (!(roomLength_txt.length() > 0)) error_txt += "\n" + roomLength.getHint() + getString(R.string.noInput);
-            if (!(roomWidth_txt.length() > 0)) error_txt += "\n" + roomWidth.getHint() + getString(R.string.noInput);
+            if (!(name_txt.length() > 0)) error_txt += "\n" + getString(R.string.name) + getString(R.string.noInput);
+            if (!(roomLength_txt.length() > 0)) error_txt += "\n" + getString(R.string.roomLength) + getString(R.string.noInput);
+            if (!(roomWidth_txt.length() > 0)) error_txt += "\n" + getString(R.string.roomLength) + getString(R.string.noInput);
             Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
         }
     }
