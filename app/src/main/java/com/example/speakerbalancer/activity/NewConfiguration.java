@@ -58,13 +58,13 @@ public class NewConfiguration extends AppCompatActivity {
             roomLength.setText("");
             roomWidth.setText("");
 
-            Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
         } else {
-            String error_txt = "Invalid Input:";
-            if (!(name_txt.length() > 0)) error_txt += "\n" + name.getHint() + " not specified";
-            if (!(systemType_txt.length() > 0)) error_txt += "\n" + systemType.getHint() + " not specified";
-            if (!(roomLength_txt.length() > 0)) error_txt += "\n" + roomLength.getHint() + " not specified";
-            if (!(roomWidth_txt.length() > 0)) error_txt += "\n" + roomWidth.getHint() + " not specified";
+            String error_txt = getString(R.string.badInput);
+            if (!(name_txt.length() > 0)) error_txt += "\n" + name.getHint() + getString(R.string.noInput);
+            if (!(systemType_txt.length() > 0)) error_txt += "\n" + systemType.getHint() + getString(R.string.noInput);
+            if (!(roomLength_txt.length() > 0)) error_txt += "\n" + roomLength.getHint() + getString(R.string.noInput);
+            if (!(roomWidth_txt.length() > 0)) error_txt += "\n" + roomWidth.getHint() + getString(R.string.noInput);
             Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
         }
     }

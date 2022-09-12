@@ -7,4 +7,7 @@
     <string name="roomLength">Length</string>
     <string name="roomWidth">Room Width</string>
     <string name="confirm">Confirm</string>
+    <string name="noInput">" not specified"</string>
+    <string name="badInput">Invalid Input:</string>
+    <string name="dataSaved">Data saved</string>
 </resources>
