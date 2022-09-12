@@ -1,12 +1,12 @@
 package com.example.speakerbalancer.data;
 
-import static androidx.room.OnConflictStrategy.REPLACE;
-
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+
+import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface StoredConfigDao {
@@ -15,4 +15,7 @@ public interface StoredConfigDao {
 
     @Query("SELECT * FROM config_table")
     List<StoredConfig> getAllData();
+
+    @Query("DELETE FROM config_table WHERE `id` = :id")
+    void deleteData(int id);
 }

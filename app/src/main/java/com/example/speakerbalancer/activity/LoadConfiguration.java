@@ -1,6 +1,8 @@
 package com.example.speakerbalancer.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +38,21 @@ public class LoadConfiguration extends AppCompatActivity {
     private void getData() {
         list = new ArrayList<>();
         list = AppDatabase.getDatabase(getApplicationContext()).getDao().getAllData();
-        recyclerView.setAdapter(new StoredConfigAdapter(getApplicationContext(), list));
+        recyclerView.setAdapter(new StoredConfigAdapter(getApplicationContext(), list, (position, id) -> {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoadConfiguration.this);
+            alertDialogBuilder.setTitle(getString(R.string.delConfig));
+            alertDialogBuilder.setMessage(getString(R.string.delConfigMsg));
+            alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
+                    (dialog, which) -> {
+                        AppDatabase.getDatabase(getApplicationContext()).getDao().deleteData(id);
+                        getData();
+                        Toast.makeText(LoadConfiguration.this, getString(R.string.delYes), Toast.LENGTH_SHORT).show();
+                    });
+            alertDialogBuilder.setNegativeButton(getString(R.string.cancel),
+                    (dialog, which) -> Toast.makeText(LoadConfiguration.this, getString(R.string.delNo), Toast.LENGTH_SHORT).show());
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }));
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 }
