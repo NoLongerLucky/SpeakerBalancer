@@ -37,23 +37,35 @@ public class NewConfiguration extends AppCompatActivity {
     private void saveData() {
         String name_txt = name.getText().toString().trim();
         String systemType_txt = systemType.getText().toString().trim();
-        double roomLength_txt = Double.parseDouble(roomLength.getText().toString());
-        double roomWidth_txt = Double.parseDouble(roomWidth.getText().toString());
+        String roomLength_txt = roomLength.getText().toString();
+        String roomWidth_txt = roomWidth.getText().toString();
 
-        StoredConfig storedConfig = new StoredConfig();
+        if (name_txt.length() > 0 && systemType_txt.length() > 0 && roomLength_txt.length() > 0 && roomWidth_txt.length() > 0) {
+            double roomLength_num = Double.parseDouble(roomLength.getText().toString());
+            double roomWidth_num = Double.parseDouble(roomWidth.getText().toString());
 
-        storedConfig.setName(name_txt);
-        storedConfig.setSystemType(systemType_txt);
-        storedConfig.setRoomLength(roomLength_txt);
-        storedConfig.setRoomWidth(roomWidth_txt);
+            StoredConfig storedConfig = new StoredConfig();
 
-        AppDatabase.getDatabase(getApplicationContext());
+            storedConfig.setName(name_txt);
+            storedConfig.setSystemType(systemType_txt);
+            storedConfig.setRoomLength(roomLength_num);
+            storedConfig.setRoomWidth(roomWidth_num);
 
-        name.setText("");
-        systemType.setText("");
-        roomLength.setText("");
-        roomWidth.setText("");
+            AppDatabase.getDatabase(getApplicationContext());
 
-        Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show();
+            name.setText("");
+            systemType.setText("");
+            roomLength.setText("");
+            roomWidth.setText("");
+
+            Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show();
+        } else {
+            String error_txt = "Invalid Input:";
+            if (!(name_txt.length() > 0)) error_txt += "\n" + name.getHint() + " not specified";
+            if (!(systemType_txt.length() > 0)) error_txt += "\n" + systemType.getHint() + " not specified";
+            if (!(roomLength_txt.length() > 0)) error_txt += "\n" + roomLength.getHint() + " not specified";
+            if (!(roomWidth_txt.length() > 0)) error_txt += "\n" + roomWidth.getHint() + " not specified";
+            Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
+        }
     }
 }
