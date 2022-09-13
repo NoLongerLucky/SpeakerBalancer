@@ -23,6 +23,9 @@ public class StoredConfig {
     @ColumnInfo(name = "room_width")
     public int roomWidth;
 
+    @ColumnInfo(name = "wall_type")
+    public String wallType;
+
     public int getId() {
         return id;
     }
@@ -61,5 +64,13 @@ public class StoredConfig {
 
     public void setRoomWidth(int roomWidth) {
         this.roomWidth = roomWidth;
+    }
+
+    public String getWallType() {
+        return wallType;
+    }
+
+    public void setWallType(String wallType) {
+        this.wallType = wallType;
     }
 }

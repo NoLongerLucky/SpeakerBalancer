@@ -15,7 +15,7 @@ import com.example.speakerbalancer.data.StoredConfig;
 
 public class NewConfiguration extends AppCompatActivity {
     EditText name, roomLength, roomWidth;
-    Spinner systemType;
+    Spinner systemType, wallType;
     Button confirm;
 
     @Override
@@ -27,6 +27,7 @@ public class NewConfiguration extends AppCompatActivity {
         systemType = findViewById(R.id.systemType);
         roomLength = findViewById(R.id.roomLength);
         roomWidth = findViewById(R.id.roomWidth);
+        wallType = findViewById(R.id.wallType);
         confirm = findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,7 @@ public class NewConfiguration extends AppCompatActivity {
         String systemType_txt = systemType.getSelectedItem().toString().trim();
         String roomLength_txt = roomLength.getText().toString();
         String roomWidth_txt = roomWidth.getText().toString();
+        String wallType_txt = wallType.getSelectedItem().toString().trim();
 
         if (name_txt.length() > 0 && roomLength_txt.length() > 0 && roomWidth_txt.length() > 0) {
             int roomLength_num = Integer.parseInt(roomLength.getText().toString());
@@ -52,6 +54,7 @@ public class NewConfiguration extends AppCompatActivity {
             storedConfig.setSystemType(systemType_txt);
             storedConfig.setRoomLength(roomLength_num);
             storedConfig.setRoomWidth(roomWidth_num);
+            storedConfig.setWallType(wallType_txt);
 
             AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
 
@@ -59,6 +62,7 @@ public class NewConfiguration extends AppCompatActivity {
             systemType.setSelection(0);
             roomLength.setText("");
             roomWidth.setText("");
+            wallType.setSelection(0);
 
             Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
         } else {
