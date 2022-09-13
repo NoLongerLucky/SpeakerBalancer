@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.speakerbalancer.R;
@@ -44,7 +45,19 @@ public class NewConfiguration extends AppCompatActivity {
         String roomWidth_txt = roomWidth.getText().toString();
         String wallType_txt = wallType.getSelectedItem().toString().trim();
 
-        if (name_txt.length() > 0 && roomLength_txt.length() > 0 && roomWidth_txt.length() > 0) {
+        String error_txt = getString(R.string.badInput);
+
+        if (!(name_txt.length() > 0)) error_txt += addError(R.string.name, R.string.noInput);
+
+        if (!(roomLength_txt.length() > 0)) error_txt += addError(R.string.roomLength, R.string.noInput);
+        else if (roomLength_txt.startsWith("0")) error_txt += addError(R.string.roomLength, R.string.zeroFirstDigit);
+
+        if (!(roomWidth_txt.length() > 0)) error_txt += addError(R.string.roomWidth, R.string.noInput);
+        else if (roomWidth_txt.startsWith("0")) error_txt += addError(R.string.roomWidth, R.string.zeroFirstDigit);
+
+        if (!error_txt.equals(getString(R.string.badInput))) {
+            Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
+        } else {
             int roomLength_num = Integer.parseInt(roomLength.getText().toString());
             int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
 
@@ -65,12 +78,10 @@ public class NewConfiguration extends AppCompatActivity {
             wallType.setSelection(0);
 
             Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
-        } else {
-            String error_txt = getString(R.string.badInput);
-            if (!(name_txt.length() > 0)) error_txt += "\n" + getString(R.string.name) + getString(R.string.noInput);
-            if (!(roomLength_txt.length() > 0)) error_txt += "\n" + getString(R.string.roomLength) + getString(R.string.noInput);
-            if (!(roomWidth_txt.length() > 0)) error_txt += "\n" + getString(R.string.roomLength) + getString(R.string.noInput);
-            Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private String addError(@StringRes int string1, @StringRes int string2) {
+        return "\n" + getString(string1) + getString(string2);
     }
 }
