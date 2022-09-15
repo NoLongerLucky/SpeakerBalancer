@@ -53,7 +53,7 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, systemType, roomLength, roomWidth, wallType;
         Button edit, delete;
 

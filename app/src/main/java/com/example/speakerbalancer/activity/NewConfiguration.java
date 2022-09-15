@@ -1,7 +1,6 @@
 package com.example.speakerbalancer.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,12 +29,7 @@ public class NewConfiguration extends AppCompatActivity {
         roomWidth = findViewById(R.id.roomWidth);
         wallType = findViewById(R.id.wallType);
         confirm = findViewById(R.id.confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveData();
-            }
-        });
+        confirm.setOnClickListener(view -> saveData());
     }
 
     private void saveData() {

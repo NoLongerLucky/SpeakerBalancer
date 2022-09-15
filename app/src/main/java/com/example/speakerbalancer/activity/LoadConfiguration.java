@@ -13,12 +13,10 @@ import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
 import com.example.speakerbalancer.data.StoredConfigAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoadConfiguration extends AppCompatActivity {
     RecyclerView recyclerView;
-    private List<StoredConfig> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +34,7 @@ public class LoadConfiguration extends AppCompatActivity {
     }
 
     private void getData() {
-        list = new ArrayList<>();
-        list = AppDatabase.getDatabase(getApplicationContext()).getDao().getAllData();
+        List<StoredConfig> list = AppDatabase.getDatabase(getApplicationContext()).getDao().getAllData();
         recyclerView.setAdapter(new StoredConfigAdapter(getApplicationContext(), list, (position, id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoadConfiguration.this);
             alertDialogBuilder.setTitle(getString(R.string.delConfig));

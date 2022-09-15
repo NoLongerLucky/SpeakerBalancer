@@ -28,4 +28,6 @@
     <string name="delNo">Deletion canceled</string>
     <string name="wallType">Wall Type</string>
     <string name="zeroFirstDigit">\'s first digit cannot be 0</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>
