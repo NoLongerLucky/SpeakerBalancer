@@ -16,6 +16,9 @@ public interface StoredConfigDao {
     @Query("SELECT * FROM config_table")
     List<StoredConfig> getAllData();
 
+    @Query("SELECT * FROM config_table WHERE `id` = :id")
+    StoredConfig getData(int id);
+
     @Query("DELETE FROM config_table WHERE `id` = :id")
     void deleteData(int id);
 }

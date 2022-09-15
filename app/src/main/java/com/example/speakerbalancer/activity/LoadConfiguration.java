@@ -1,6 +1,7 @@
 package com.example.speakerbalancer.activity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -36,6 +37,10 @@ public class LoadConfiguration extends AppCompatActivity {
     private void getData() {
         List<StoredConfig> list = AppDatabase.getDatabase(getApplicationContext()).getDao().getAllData();
         recyclerView.setAdapter(new StoredConfigAdapter(getApplicationContext(), list, (position, id) -> {
+            Intent i = new Intent(LoadConfiguration.this, EditConfiguration.class);
+            i.putExtra("id", id);
+            startActivity(i);
+        }, (position, id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoadConfiguration.this);
             alertDialogBuilder.setTitle(getString(R.string.delConfig));
             alertDialogBuilder.setMessage(getString(R.string.delConfigMsg));

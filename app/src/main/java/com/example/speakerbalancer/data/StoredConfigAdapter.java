@@ -17,18 +17,20 @@ import java.util.List;
 public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapter.ViewHolder> {
     Context context;
     List<StoredConfig> list;
+    EditItemClickListener editItemClickListener;
     DeleteItemClickListener deleteItemClickListener;
 
-    public StoredConfigAdapter(Context context, List<StoredConfig> list, DeleteItemClickListener deleteItemClickListener) {
+    public StoredConfigAdapter(Context context, List<StoredConfig> list, EditItemClickListener editItemClickListener, DeleteItemClickListener deleteItemClickListener) {
         this.context = context;
         this.list = list;
+        this.editItemClickListener = editItemClickListener;
         this.deleteItemClickListener = deleteItemClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_layout, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_load_layout, parent, false));
     }
 
     @Override
@@ -45,6 +47,7 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
         holder.roomWidth.setText(roomWidth);
         holder.wallType.setText(wallType);
 
+        holder.edit.setOnClickListener(view -> editItemClickListener.onItemEdit(position, list.get(position).getId()));
         holder.delete.setOnClickListener(view -> deleteItemClickListener.onItemDelete(position, list.get(position).getId()));
     }
 
@@ -68,6 +71,10 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
             edit = itemView.findViewById(R.id.edit);
             delete = itemView.findViewById(R.id.delete);
         }
+    }
+
+    public interface EditItemClickListener {
+        void onItemEdit(int position, int id);
     }
 
     public interface DeleteItemClickListener {
