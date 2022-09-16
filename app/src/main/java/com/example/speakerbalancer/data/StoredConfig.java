@@ -1,8 +1,14 @@
 package com.example.speakerbalancer.data;
 
+import android.content.Context;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.example.speakerbalancer.R;
+
+import java.util.Arrays;
 
 @Entity(tableName = "config_table")
 public class StoredConfig {
@@ -44,6 +50,11 @@ public class StoredConfig {
         return systemType;
     }
 
+    public int getSystemTypeFromArray(Context context, String systemType) {
+        String[] systemTypes = context.getResources().getStringArray(R.array.systemTypes);
+        return Arrays.asList(systemTypes).indexOf(systemType);
+    }
+
     public void setSystemType(String systemType) {
         this.systemType = systemType;
     }
@@ -66,6 +77,11 @@ public class StoredConfig {
 
     public String getWallType() {
         return wallType;
+    }
+
+    public int getWallTypeFromArray(Context context, String wallType) {
+        String[] wallTypes = context.getResources().getStringArray(R.array.wallTypes);
+        return Arrays.asList(wallTypes).indexOf(wallType);
     }
 
     public void setWallType(String wallType) {

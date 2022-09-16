@@ -1,6 +1,8 @@
 package com.example.speakerbalancer.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,5 +34,11 @@ public class EditConfiguration extends AppCompatActivity {
     private void setData() {
         StoredConfig config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
         if (name != null) name.setText(config.getName());
+    }
+
+    public void launch_editConfigInfo(View v) {
+        Intent i = new Intent(this, EditConfigurationInfo.class);
+        i.putExtra("id", id);
+        startActivity(i);
     }
 }

@@ -52,30 +52,34 @@ public class NewConfiguration extends AppCompatActivity {
         if (!error_txt.equals(getString(R.string.badInput))) {
             Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
         } else {
-            int roomLength_num = Integer.parseInt(roomLength.getText().toString());
-            int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
-
-            StoredConfig storedConfig = new StoredConfig();
-
-            storedConfig.setName(name_txt);
-            storedConfig.setSystemType(systemType_txt);
-            storedConfig.setRoomLength(roomLength_num);
-            storedConfig.setRoomWidth(roomWidth_num);
-            storedConfig.setWallType(wallType_txt);
-
-            AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
-
-            name.setText("");
-            systemType.setSelection(0);
-            roomLength.setText("");
-            roomWidth.setText("");
-            wallType.setSelection(0);
-
-            Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
+            confirmSuccess(name_txt, systemType_txt, wallType_txt);
         }
     }
 
-    private String addError(@StringRes int string1, @StringRes int string2) {
+    protected void confirmSuccess(String name_txt, String systemType_txt, String wallType_txt) {
+        int roomLength_num = Integer.parseInt(roomLength.getText().toString());
+        int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
+
+        StoredConfig storedConfig = new StoredConfig();
+
+        storedConfig.setName(name_txt);
+        storedConfig.setSystemType(systemType_txt);
+        storedConfig.setRoomLength(roomLength_num);
+        storedConfig.setRoomWidth(roomWidth_num);
+        storedConfig.setWallType(wallType_txt);
+
+        AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
+
+        name.setText("");
+        systemType.setSelection(0);
+        roomLength.setText("");
+        roomWidth.setText("");
+        wallType.setSelection(0);
+
+        Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
+    }
+
+    protected String addError(@StringRes int string1, @StringRes int string2) {
         return "\n" + getString(string1) + getString(string2);
     }
 }

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeakerBalancer">
-        <activity android:name=".activity.EditConfiguration"></activity>
+        <activity android:name=".activity.EditConfigurationInfo"></activity>
+        <activity android:name=".activity.EditConfiguration" />
         <activity android:name=".activity.LoadConfiguration" />
         <activity android:name=".activity.NewConfiguration" />
         <activity
