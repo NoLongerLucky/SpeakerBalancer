@@ -21,4 +21,7 @@ public interface StoredConfigDao {
 
     @Query("DELETE FROM config_table WHERE `id` = :id")
     void deleteData(int id);
+
+    @Query("SELECT * FROM config_table ORDER BY id DESC LIMIT 1")
+    int getNewId();
 }

@@ -1,5 +1,6 @@
 package com.example.speakerbalancer.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,6 +78,12 @@ public class NewConfiguration extends AppCompatActivity {
         wallType.setSelection(0);
 
         Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
+
+        finish();
+
+        Intent i = new Intent(NewConfiguration.this, EditConfiguration.class);
+        i.putExtra("id", AppDatabase.getDatabase(getApplicationContext()).getDao().getNewId());
+        startActivity(i);
     }
 
     protected String addError(@StringRes int string1, @StringRes int string2) {
