@@ -31,4 +31,6 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="editBasicInfo">Edit Basic Info</string>
+    <string name="roomLengthFt">Room Length (ft)</string>
+    <string name="roomWidthFt">Room Width (ft)</string>
 </resources>

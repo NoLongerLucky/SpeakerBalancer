@@ -42,7 +42,7 @@
             android:id="@+id/roomLength_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/roomLength" />
+            android:text="@string/roomLengthFt" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -54,7 +54,7 @@
             android:id="@+id/roomWidth_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/roomWidth" />
+            android:text="@string/roomWidthFt" />
     </RelativeLayout>
 
     <RelativeLayout
