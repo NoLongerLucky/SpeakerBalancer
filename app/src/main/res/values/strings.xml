@@ -30,4 +30,5 @@
     <string name="zeroFirstDigit">\'s first digit cannot be 0</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="editBasicInfo">Edit Basic Info</string>
 </resources>
