@@ -30,10 +30,10 @@ public class NewConfiguration extends AppCompatActivity {
         roomWidth = findViewById(R.id.roomWidth);
         wallType = findViewById(R.id.wallType);
         confirm = findViewById(R.id.confirm);
-        confirm.setOnClickListener(view -> saveData());
+        confirm.setOnClickListener(view -> saveData(-1));
     }
 
-    private void saveData() {
+    protected void saveData(int id) {
         String name_txt = name.getText().toString().trim();
         String systemType_txt = systemType.getSelectedItem().toString().trim();
         String roomLength_txt = roomLength.getText().toString();
@@ -43,6 +43,7 @@ public class NewConfiguration extends AppCompatActivity {
         String error_txt = getString(R.string.badInput);
 
         if (!(name_txt.length() > 0)) error_txt += addError(R.string.name, R.string.noInput);
+        else if (id != -1) if (AppDatabase.getDatabase(getApplicationContext()).getDao().getOtherNames(id).contains(name_txt)) error_txt += addError(R.string.name, R.string.nameMultiple);
 
         if (!(roomLength_txt.length() > 0)) error_txt += addError(R.string.roomLength, R.string.noInput);
         else if (roomLength_txt.startsWith("0")) error_txt += addError(R.string.roomLength, R.string.zeroFirstDigit);

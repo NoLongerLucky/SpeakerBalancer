@@ -14,6 +14,7 @@ public class EditConfigurationInfo extends NewConfiguration {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         id = getIntent().getExtras().getInt("id");
+        confirm.setOnClickListener(view -> saveData(id));
 
         StoredConfig config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 

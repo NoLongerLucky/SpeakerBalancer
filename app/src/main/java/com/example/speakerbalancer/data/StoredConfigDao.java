@@ -24,4 +24,7 @@ public interface StoredConfigDao {
 
     @Query("SELECT * FROM config_table ORDER BY id DESC LIMIT 1")
     int getNewId();
+
+    @Query("SELECT name FROM config_table WHERE id != :id")
+    List<String> getOtherNames(int id);
 }

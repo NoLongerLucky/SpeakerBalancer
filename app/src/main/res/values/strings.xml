@@ -33,4 +33,5 @@
     <string name="editBasicInfo">Edit Basic Info</string>
     <string name="roomLengthFt">Room Length (ft)</string>
     <string name="roomWidthFt">Room Width (ft)</string>
+    <string name="nameMultiple">" is already used by a different configuration"</string>
 </resources>
