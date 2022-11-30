@@ -15,7 +15,7 @@ import com.example.speakerbalancer.data.StoredConfig;
 public class EditConfiguration extends AppCompatActivity {
     int id, borderHeight, borderWidth, borderOriginal;
     StoredConfig config;
-    TextView name, systemType, roomLength, roomWidth, wallType;
+    TextView name, systemType, roomLength, roomWidth, wallType, boxLengthDisplay, boxWidthDisplay;
     ConstraintLayout border;
 
     @Override
@@ -71,6 +71,13 @@ public class EditConfiguration extends AppCompatActivity {
         border.getLayoutParams().height = borderHeight;
         border.getLayoutParams().width = borderWidth;
         border.setLayoutParams(border.getLayoutParams());
+
+        boxLengthDisplay = findViewById(R.id.boxLengthDisplay);
+        boxWidthDisplay = findViewById(R.id.boxWidthDisplay);
+        String lengthDisplay = " " + config.getRoomLength() + " ft ";
+        String widthDisplay = " " + config.getRoomWidth() + " ft ";
+        boxLengthDisplay.setText(lengthDisplay);
+        boxWidthDisplay.setText(widthDisplay);
     }
 
     public void launch_editConfigInfo(View v) {
