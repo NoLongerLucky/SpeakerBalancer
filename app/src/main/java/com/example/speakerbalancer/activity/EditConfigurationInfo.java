@@ -1,5 +1,6 @@
 package com.example.speakerbalancer.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,6 +10,7 @@ import com.example.speakerbalancer.data.StoredConfig;
 
 public class EditConfigurationInfo extends NewConfiguration {
     int id;
+    StoredConfig config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +18,7 @@ public class EditConfigurationInfo extends NewConfiguration {
         id = getIntent().getExtras().getInt("id");
         confirm.setOnClickListener(view -> saveData(id));
 
-        StoredConfig config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
+        config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 
         if (name != null) name.setText(config.getName());
         systemType.setSelection(config.getSystemTypeFromArray(getApplicationContext(), config.getSystemType()));
@@ -26,6 +28,22 @@ public class EditConfigurationInfo extends NewConfiguration {
     }
 
     protected void confirmSuccess(String name_txt, String systemType_txt, String wallType_txt) {
+        if (!config.getSystemType().equals(systemType_txt)) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditConfigurationInfo.this);
+            alertDialogBuilder.setTitle(getString(R.string.changedSystem));
+            alertDialogBuilder.setMessage(getString(R.string.changedSystemBody));
+            alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
+                    (dialog, which) -> {
+                        // Resetting speaker positions will go here
+                        saveChanges(name_txt, systemType_txt, wallType_txt);
+                    });
+            alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        } else saveChanges(name_txt, systemType_txt, wallType_txt);
+    }
+
+    private void saveChanges(String name_txt, String systemType_txt, String wallType_txt) {
         int roomLength_num = Integer.parseInt(roomLength.getText().toString());
         int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
 

@@ -34,4 +34,6 @@
     <string name="roomLengthFt">Room Length (ft)</string>
     <string name="roomWidthFt">Room Width (ft)</string>
     <string name="nameMultiple">" is already used by a different configuration"</string>
+    <string name="changedSystem">System Type Changed</string>
+    <string name="changedSystemBody">Changing the system type will reset configured speaker positions. Are you sure you would like to continue?</string>
 </resources>
