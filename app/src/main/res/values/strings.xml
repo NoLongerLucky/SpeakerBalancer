@@ -36,4 +36,5 @@
     <string name="nameMultiple">" is already used by a different configuration"</string>
     <string name="changedSystem">System Type Changed</string>
     <string name="changedSystemBody">Changing the system type will reset configured speaker positions. Are you sure you would like to continue?</string>
+    <string name="editLayout">Edit Speaker Layout</string>
 </resources>
