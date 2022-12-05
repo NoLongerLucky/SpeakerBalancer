@@ -21,7 +21,7 @@ public class EditConfiguration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_configuration);
+        setLayout();
         id = getIntent().getExtras().getInt("id");
         config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 
@@ -40,6 +40,10 @@ public class EditConfiguration extends AppCompatActivity {
         setData();
     }
 
+    protected void setLayout() {
+        setContentView(R.layout.activity_edit_configuration);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -48,7 +52,7 @@ public class EditConfiguration extends AppCompatActivity {
         setRoom();
     }
 
-    private void setData() {
+    protected void setData() {
         if (name != null) name.setText(config.getName());
         if (systemType != null) systemType.setText(config.getSystemType());
         if (roomLength != null) roomLength.setText(String.valueOf(config.getRoomLength()));
@@ -56,7 +60,7 @@ public class EditConfiguration extends AppCompatActivity {
         if (wallType != null) wallType.setText(config.getWallType());
     }
 
-    private void setRoom() {
+    protected void setRoom() {
         double length, width, denominator;
         borderHeight = borderWidth = borderOriginal;
         length = config.getRoomLength();
@@ -82,6 +86,12 @@ public class EditConfiguration extends AppCompatActivity {
 
     public void launch_editConfigInfo(View v) {
         Intent i = new Intent(this, EditConfigurationInfo.class);
+        i.putExtra("id", id);
+        startActivity(i);
+    }
+
+    public void launch_editSpeakerLayout(View v) {
+        Intent i = new Intent(this, EditSpeakerLayout.class);
         i.putExtra("id", id);
         startActivity(i);
     }
