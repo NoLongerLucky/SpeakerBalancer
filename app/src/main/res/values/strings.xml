@@ -38,4 +38,6 @@
     <string name="changedSystemBody">Changing the system type will reset configured speaker positions. Are you sure you would like to continue?</string>
     <string name="editLayout">Edit Speaker Layout</string>
     <string name="saveLayout">Save Layout</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
 </resources>
