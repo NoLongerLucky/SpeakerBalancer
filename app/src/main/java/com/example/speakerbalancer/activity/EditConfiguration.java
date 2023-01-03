@@ -86,19 +86,41 @@ public class EditConfiguration extends AppCompatActivity {
         boxLengthDisplay.setText(lengthDisplay);
         boxWidthDisplay.setText(widthDisplay);
 
-        createSpeakerBox();
+        // Bad code, just a proof of concept
+        // TO-DO:
+        // - Set up enums(?) for system types and amounts of speakers
+        // - Have different representations for each type of speaker
+        // - Save speaker positions to database
+        // - Display list of speakers on EditSpeakerLayout activity
+        // - Above list is selectable, allowing positions to be changed with sliders
+        int repeats;
+        switch (config.getSystemType()) {
+            case "3.1":
+                repeats = 1;
+                break;
+            case "5.1":
+                repeats = 2;
+                break;
+            case "7.1":
+                repeats = 3;
+                break;
+            default:
+                repeats = 4;
+                break;
+        }
+        for (int i = 0; i < repeats; i++) createSpeakerBox(i);
     }
 
-    protected void createSpeakerBox() {
+    protected void createSpeakerBox(int index) {
         ConstraintLayout mConstraintLayout = findViewById(R.id.border);
         ConstraintSet set = new ConstraintSet();
         View view = new View(this);
         view.setId(View.generateViewId());
         view.setBackgroundColor(Color.parseColor("#000000"));
         view.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-        mConstraintLayout.addView(view,0);
+        mConstraintLayout.addView(view,index);
         set.clone(mConstraintLayout);
-        set.connect(view.getId(), ConstraintSet.TOP, mConstraintLayout.getId(), ConstraintSet.TOP, 30);
+        set.connect(view.getId(), ConstraintSet.TOP, mConstraintLayout.getId(), ConstraintSet.TOP, 100 * index);
         set.connect(view.getId(), ConstraintSet.LEFT, mConstraintLayout.getId(), ConstraintSet.LEFT, 30);
         set.applyTo(mConstraintLayout);
     }
