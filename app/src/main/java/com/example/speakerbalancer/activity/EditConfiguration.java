@@ -1,12 +1,15 @@
 package com.example.speakerbalancer.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.speakerbalancer.R;
 import com.example.speakerbalancer.data.AppDatabase;
@@ -82,6 +85,22 @@ public class EditConfiguration extends AppCompatActivity {
         String widthDisplay = " " + config.getRoomWidth() + " ft ";
         boxLengthDisplay.setText(lengthDisplay);
         boxWidthDisplay.setText(widthDisplay);
+
+        createSpeakerBox();
+    }
+
+    protected void createSpeakerBox() {
+        ConstraintLayout mConstraintLayout = findViewById(R.id.border);
+        ConstraintSet set = new ConstraintSet();
+        View view = new View(this);
+        view.setId(View.generateViewId());
+        view.setBackgroundColor(Color.parseColor("#000000"));
+        view.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+        mConstraintLayout.addView(view,0);
+        set.clone(mConstraintLayout);
+        set.connect(view.getId(), ConstraintSet.TOP, mConstraintLayout.getId(), ConstraintSet.TOP, 30);
+        set.connect(view.getId(), ConstraintSet.LEFT, mConstraintLayout.getId(), ConstraintSet.LEFT, 30);
+        set.applyTo(mConstraintLayout);
     }
 
     public void launch_editConfigInfo(View v) {
