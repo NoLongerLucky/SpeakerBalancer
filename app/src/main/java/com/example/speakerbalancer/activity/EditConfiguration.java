@@ -88,11 +88,19 @@ public class EditConfiguration extends AppCompatActivity {
 
         // Bad code, just a proof of concept
         // TO-DO:
-        // - Set up enums(?) for system types and amounts of speakers
+        // - Set up abstract class for Speaker data type
+        // - Create specific speaker classes that extend Speaker abstract class
+        // - Convert system type to an input for number of each speaker type
+        //  ~ Update layout
+        //  ~ Update all necessary variables
+        //  ~ Creating new layout creates array of all speakers
+        //  ~ Updating speaker types re-initializes the array
         // - Have different representations for each type of speaker
+        // - Make speakers movable
         // - Save speaker positions to database
-        // - Display list of speakers on EditSpeakerLayout activity
-        // - Above list is selectable, allowing positions to be changed with sliders
+        // - Display list of speakers on EditSpeakerLayout activity in a table
+        // - Above list has a button for each entry, selecting it allows speaker to be moved
+        // - Above list also allows editing each speaker's individual traits
         int repeats;
         switch (config.getSystemType()) {
             case "3.1":
