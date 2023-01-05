@@ -88,8 +88,8 @@ public class EditConfiguration extends AppCompatActivity {
 
         // Bad code, just a proof of concept
         // TO-DO:
-        // - Set up abstract class for Speaker data type
-        // - Create specific speaker classes that extend Speaker abstract class
+        // X Set up abstract class for Speaker data type
+        // X Create specific speaker classes that extend Speaker abstract class
         // - Convert system type to an input for number of each speaker type
         //  ~ Update layout
         //  ~ Update all necessary variables
