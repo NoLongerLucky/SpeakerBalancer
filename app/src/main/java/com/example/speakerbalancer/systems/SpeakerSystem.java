@@ -9,7 +9,7 @@ public class SpeakerSystem {
 
     public SpeakerSystem(int amount) {
         this.amount = amount;
-        this.speakers = new Speaker[amount + 1];
+        this.speakers = new Speaker[amount + (lfe.isEnabled() ? 1 : 0)];
     }
 
     protected String notation() {
