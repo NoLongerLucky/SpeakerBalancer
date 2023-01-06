@@ -8,8 +8,7 @@ import com.example.speakerbalancer.systems.SpeakerSystem;
 
 public class Stereo extends SpeakerSystem {
     public Stereo() {
-        super(3);
-        lfe.setAllowed(true);
+        super(3, "Stereo", true);
 
         speakers[0] = new Tweeter(Channel.SPEAKER_FRONT_LEFT);
         speakers[1] = new Tweeter(Channel.SPEAKER_FRONT_RIGHT);

@@ -4,12 +4,15 @@ import com.example.speakerbalancer.speakers.Speaker;
 
 public class SpeakerSystem {
     protected int amount;
+    public String name;
     protected Speaker[] speakers;
     protected LFE lfe = new LFE();
 
-    public SpeakerSystem(int amount) {
+    public SpeakerSystem(int amount, String name, boolean allowLFE) {
+        lfe.setAllowed(allowLFE);
         this.amount = amount;
-        this.speakers = new Speaker[amount + (lfe.isEnabled() ? 1 : 0)];
+        this.name = name;
+        this.speakers = new Speaker[amount + (lfe.isAllowed() ? 1 : 0)];
     }
 
     protected String notation() {
