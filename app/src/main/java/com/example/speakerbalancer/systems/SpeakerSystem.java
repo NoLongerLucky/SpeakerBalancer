@@ -9,7 +9,7 @@ public class SpeakerSystem {
 
     public SpeakerSystem(int amount) {
         this.amount = amount;
-        this.speakers = new Speaker[amount];
+        this.speakers = new Speaker[amount + 1];
     }
 
     protected String notation() {

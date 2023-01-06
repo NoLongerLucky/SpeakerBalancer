@@ -1,5 +1,6 @@
 package com.example.speakerbalancer.systems.layouts;
 
+import com.example.speakerbalancer.speakers.Midrange;
 import com.example.speakerbalancer.speakers.Subwoofer;
 import com.example.speakerbalancer.speakers.Tweeter;
 import com.example.speakerbalancer.systems.Channel;
@@ -10,8 +11,9 @@ public class Stereo extends SpeakerSystem {
         super(3);
         lfe.setAllowed(true);
 
-        speakers[0] = new Tweeter(0, 0, Channel.SPEAKER_FRONT_LEFT);
-        speakers[1] = new Tweeter(1, 0, Channel.SPEAKER_FRONT_RIGHT);
-        speakers[2] = new Subwoofer(0.5, 0.5, Channel.SPEAKER_LOW_FREQUENCY);
+        speakers[0] = new Tweeter(Channel.SPEAKER_FRONT_LEFT);
+        speakers[1] = new Tweeter(Channel.SPEAKER_FRONT_RIGHT);
+        speakers[2] = new Midrange(Channel.SPEAKER_FRONT_CENTER);
+        speakers[3] = new Subwoofer(Channel.SPEAKER_LOW_FREQUENCY);
     }
 }

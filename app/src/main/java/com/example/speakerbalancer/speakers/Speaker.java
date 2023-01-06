@@ -6,12 +6,9 @@ import com.example.speakerbalancer.systems.Channel;
 public class Speaker {
     protected String name;
     protected Range range;
-    protected double xBias, yBias;
     protected Channel channel;
 
-    Speaker(double xBias, double yBias, Channel channel) {
-        this.xBias = xBias;
-        this.yBias = yBias;
+    Speaker(Channel channel) {
         this.channel = channel;
     }
 }
