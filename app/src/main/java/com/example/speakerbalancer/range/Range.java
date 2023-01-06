@@ -14,4 +14,20 @@ public class Range {
     public String toString() {
         return min + " - " + max;
     }
+
+    public Ranges getMin() {
+        return min;
+    }
+
+    public void setMin(Ranges min) {
+        this.min = min;
+    }
+
+    public Ranges getMax() {
+        return max;
+    }
+
+    public void setMax(Ranges max) {
+        this.max = max;
+    }
 }

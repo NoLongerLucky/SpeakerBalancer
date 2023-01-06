@@ -1,13 +1,13 @@
 package com.example.speakerbalancer.speakers;
 
-import com.example.speakerbalancer.range.Range;
 import com.example.speakerbalancer.range.Ranges;
+import com.example.speakerbalancer.systems.Channel;
 
 public class Subwoofer extends Speaker {
-    final String name = "Subwoofer";
-    final Range range = new Range(Ranges.FLOOR, Ranges.SUBWOOFER);
-
-    Subwoofer(String name, Range range) {
-        super(name, range);
+    public Subwoofer(double xBias, double yBias, Channel channel) {
+        super(xBias, yBias, channel);
+        name = "Subwoofer";
+        range.setMin(Ranges.FLOOR);
+        range.setMax(Ranges.SUBWOOFER);
     }
 }
