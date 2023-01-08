@@ -36,10 +36,10 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
     @Override
     public void onBindViewHolder(@NonNull StoredConfigAdapter.ViewHolder holder, final int position) {
         String name = context.getString(R.string.name) + ": " + list.get(position).getName();
-        String systemType = context.getString(R.string.systemType) + ": " + list.get(position).getSystemType();
+        String systemType = context.getString(R.string.systemType) + ": " + list.get(position).getSystemType().name;
         String roomLength = context.getString(R.string.roomLengthFt) + ": " + list.get(position).getRoomLength();
         String roomWidth = context.getString(R.string.roomWidthFt) + ": " + list.get(position).getRoomWidth();
-        String wallType = context.getString(R.string.wallType) + ": " + list.get(position).getWallType();
+        String wallType = context.getString(R.string.wallType) + ": " + list.get(position).getWallMaterial();
 
         holder.name.setText(name);
         holder.systemType.setText(systemType);

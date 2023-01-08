@@ -2,6 +2,8 @@ package com.example.speakerbalancer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,10 +25,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NewConfiguration extends AppCompatActivity {
-    EditText name, roomLength, roomWidth;
-    Spinner systemType, wallType;
+    EditText nameInput, roomLengthInput, roomWidthInput;
+    Spinner systemTypeSpinner, wallMaterialSpinner;
+    int systemTypeSpinnerId;
     Button confirm;
-    List<SpeakerSystem> systems;
+    List<SpeakerSystem> systemObjects;
     String[] systemNames;
 
     @Override
@@ -34,70 +37,89 @@ public class NewConfiguration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_configuration);
 
-        name = findViewById(R.id.name);
-        systemType = findViewById(R.id.systemType);
-        roomLength = findViewById(R.id.roomLength);
-        roomWidth = findViewById(R.id.roomWidth);
-        wallType = findViewById(R.id.wallType);
+        nameInput = findViewById(R.id.nameInput);
+        systemTypeSpinner = findViewById(R.id.systemTypeSpinner);
+        roomLengthInput = findViewById(R.id.roomLengthInput);
+        roomWidthInput = findViewById(R.id.roomWidthInput);
+        wallMaterialSpinner = findViewById(R.id.wallTypeSpinner);
         confirm = findViewById(R.id.confirm);
         confirm.setOnClickListener(view -> saveData(-1));
 
-        systems = Arrays.asList(new Stereo(), new Surround(), new Quad());
-        systemNames = new String[systems.size()];
-        for (SpeakerSystem system : systems) {
-            systemNames[systems.indexOf(system)] = system.name;
+        systemObjects = Arrays.asList(new Stereo(), new Surround(), new Quad());
+        systemNames = new String[systemObjects.size()];
+        for (SpeakerSystem system : systemObjects) {
+            systemNames[systemObjects.indexOf(system)] = system.name;
         }
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, systemNames);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        systemType.setAdapter(spinnerAdapter);
+        systemTypeSpinner.setAdapter(spinnerAdapter);
+
+        systemTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                systemTypeSpinnerId = (int) id;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                systemTypeSpinnerId = 0;
+            }
+        });
     }
 
     protected void saveData(int id) {
-        String name_txt = name.getText().toString().trim();
-        String systemType_txt = systemType.getSelectedItem().toString().trim();
-        String roomLength_txt = roomLength.getText().toString();
-        String roomWidth_txt = roomWidth.getText().toString();
-        String wallType_txt = wallType.getSelectedItem().toString().trim();
+        String nameString = nameInput.getText().toString().trim();
+        String systemTypeString = systemTypeSpinner.getSelectedItem().toString().trim();
+        String roomLengthString = roomLengthInput.getText().toString();
+        String roomWidthString = roomWidthInput.getText().toString();
+        String wallMaterialString = wallMaterialSpinner.getSelectedItem().toString().trim();
 
-        String error_txt = getString(R.string.badInput);
+        String errorMessage = getString(R.string.badInput);
 
-        if (!(name_txt.length() > 0)) error_txt += addError(R.string.name, R.string.noInput);
-        else if (id != -1) if (AppDatabase.getDatabase(getApplicationContext()).getDao().getOtherNames(id).contains(name_txt)) error_txt += addError(R.string.name, R.string.nameMultiple);
+        // Name not longer than 0 characters
+        if (!(nameString.length() > 0)) errorMessage += addError(R.string.name, R.string.noInput);
+        // Duplicate name
+        else if (id != -1) if (AppDatabase.getDatabase(getApplicationContext()).getDao().getOtherNames(id).contains(nameString)) errorMessage += addError(R.string.name, R.string.nameMultiple);
 
-        if (!(roomLength_txt.length() > 0)) error_txt += addError(R.string.roomLength, R.string.noInput);
-        else if (roomLength_txt.startsWith("0")) error_txt += addError(R.string.roomLength, R.string.zeroFirstDigit);
+        // Room length not larger than 0
+        if (!(roomLengthString.length() > 0)) errorMessage += addError(R.string.roomLength, R.string.noInput);
+        // Room length begins with 0
+        else if (roomLengthString.startsWith("0")) errorMessage += addError(R.string.roomLength, R.string.zeroFirstDigit);
 
-        if (!(roomWidth_txt.length() > 0)) error_txt += addError(R.string.roomWidth, R.string.noInput);
-        else if (roomWidth_txt.startsWith("0")) error_txt += addError(R.string.roomWidth, R.string.zeroFirstDigit);
+        // Room width not larger than 0
+        if (!(roomWidthString.length() > 0)) errorMessage += addError(R.string.roomWidth, R.string.noInput);
+        // Room width begins with 0
+        else if (roomWidthString.startsWith("0")) errorMessage += addError(R.string.roomWidth, R.string.zeroFirstDigit);
 
-        if (!error_txt.equals(getString(R.string.badInput))) {
-            Toast.makeText(this, error_txt, Toast.LENGTH_SHORT).show();
+        if (!errorMessage.equals(getString(R.string.badInput))) {
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
         } else {
-            confirmSuccess(name_txt, systemType_txt, wallType_txt);
+            confirmSuccess(nameString, wallMaterialString);
         }
     }
 
-    protected void confirmSuccess(String name_txt, String systemType_txt, String wallType_txt) {
-        int roomLength_num = Integer.parseInt(roomLength.getText().toString());
-        int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
+    protected void confirmSuccess(String nameData, String wallMaterialData) {
+        SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
+        int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
+        int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
 
         StoredConfig storedConfig = new StoredConfig();
 
-        storedConfig.setName(name_txt);
-        storedConfig.setSystemType(systemType_txt);
-        storedConfig.setRoomLength(roomLength_num);
-        storedConfig.setRoomWidth(roomWidth_num);
-        storedConfig.setWallType(wallType_txt);
+        storedConfig.setName(nameData);
+        storedConfig.setSystemType(systemTypeData);
+        storedConfig.setRoomLength(roomLengthData);
+        storedConfig.setRoomWidth(roomWidthData);
+        storedConfig.setWallMaterial(wallMaterialData);
 
         AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
 
-        name.setText("");
-        systemType.setSelection(0);
-        roomLength.setText("");
-        roomWidth.setText("");
-        wallType.setSelection(0);
+        nameInput.setText("");
+        systemTypeSpinner.setSelection(0);
+        roomLengthInput.setText("");
+        roomWidthInput.setText("");
+        wallMaterialSpinner.setSelection(0);
 
         Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
 

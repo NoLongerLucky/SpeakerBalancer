@@ -7,6 +7,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.speakerbalancer.R;
+import com.example.speakerbalancer.systems.SpeakerSystem;
 
 import java.util.Arrays;
 
@@ -19,7 +20,7 @@ public class StoredConfig {
     public String name;
 
     @ColumnInfo(name = "system_type")
-    public String systemType;
+    public SpeakerSystem systemType;
 
     @ColumnInfo(name = "room_length")
     public int roomLength;
@@ -27,8 +28,8 @@ public class StoredConfig {
     @ColumnInfo(name = "room_width")
     public int roomWidth;
 
-    @ColumnInfo(name = "wall_type")
-    public String wallType;
+    @ColumnInfo(name = "wall_material")
+    public String wallMaterial;
 
     public int getId() {
         return id;
@@ -46,16 +47,11 @@ public class StoredConfig {
         this.name = name;
     }
 
-    public String getSystemType() {
+    public SpeakerSystem getSystemType() {
         return systemType;
     }
 
-    public int getSystemTypeFromArray(Context context, String systemType) {
-        String[] systemTypes = context.getResources().getStringArray(R.array.systemTypes);
-        return Arrays.asList(systemTypes).indexOf(systemType);
-    }
-
-    public void setSystemType(String systemType) {
+    public void setSystemType(SpeakerSystem systemType) {
         this.systemType = systemType;
     }
 
@@ -75,8 +71,8 @@ public class StoredConfig {
         this.roomWidth = roomWidth;
     }
 
-    public String getWallType() {
-        return wallType;
+    public String getWallMaterial() {
+        return wallMaterial;
     }
 
     public int getWallTypeFromArray(Context context, String wallType) {
@@ -84,7 +80,7 @@ public class StoredConfig {
         return Arrays.asList(wallTypes).indexOf(wallType);
     }
 
-    public void setWallType(String wallType) {
-        this.wallType = wallType;
+    public void setWallMaterial(String wallMaterial) {
+        this.wallMaterial = wallMaterial;
     }
 }

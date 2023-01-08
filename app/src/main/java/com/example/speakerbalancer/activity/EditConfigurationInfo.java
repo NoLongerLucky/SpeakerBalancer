@@ -7,6 +7,9 @@ import android.widget.Toast;
 import com.example.speakerbalancer.R;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
+import com.example.speakerbalancer.systems.SpeakerSystem;
+
+import java.util.Arrays;
 
 public class EditConfigurationInfo extends NewConfiguration {
     int id;
@@ -20,41 +23,42 @@ public class EditConfigurationInfo extends NewConfiguration {
 
         config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 
-        if (name != null) name.setText(config.getName());
-        systemType.setSelection(config.getSystemTypeFromArray(getApplicationContext(), config.getSystemType()));
-        if (roomLength != null) roomLength.setText(String.valueOf(config.getRoomLength()));
-        if (roomWidth != null) roomWidth.setText(String.valueOf(config.getRoomWidth()));
-        wallType.setSelection(config.getWallTypeFromArray(getApplicationContext(), config.getWallType()));
+        if (nameInput != null) nameInput.setText(config.getName());
+        systemTypeSpinner.setSelection(Arrays.asList(systemNames).indexOf(config.getSystemType().name));
+        if (roomLengthInput != null) roomLengthInput.setText(String.valueOf(config.getRoomLength()));
+        if (roomWidthInput != null) roomWidthInput.setText(String.valueOf(config.getRoomWidth()));
+        wallMaterialSpinner.setSelection(config.getWallTypeFromArray(getApplicationContext(), config.getWallMaterial()));
     }
 
-    protected void confirmSuccess(String name_txt, String systemType_txt, String wallType_txt) {
-        if (!config.getSystemType().equals(systemType_txt)) {
+    protected void confirmSuccess(String nameData, String wallMaterialData) {
+        SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
+        if (!config.getSystemType().name.equals(systemTypeData.name)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditConfigurationInfo.this);
             alertDialogBuilder.setTitle(getString(R.string.changedSystem));
             alertDialogBuilder.setMessage(getString(R.string.changedSystemBody));
             alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
                     (dialog, which) -> {
                         // Resetting speaker positions will go here
-                        saveChanges(name_txt, systemType_txt, wallType_txt);
+                        saveChanges(nameData, systemTypeData, wallMaterialData);
                     });
             alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } else saveChanges(name_txt, systemType_txt, wallType_txt);
+        } else saveChanges(nameData, systemTypeData, wallMaterialData);
     }
 
-    private void saveChanges(String name_txt, String systemType_txt, String wallType_txt) {
-        int roomLength_num = Integer.parseInt(roomLength.getText().toString());
-        int roomWidth_num = Integer.parseInt(roomWidth.getText().toString());
+    private void saveChanges(String nameData, SpeakerSystem systemTypeData, String wallMaterialData) {
+        int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
+        int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
 
         StoredConfig storedConfig = new StoredConfig();
 
         storedConfig.setId(id);
-        storedConfig.setName(name_txt);
-        storedConfig.setSystemType(systemType_txt);
-        storedConfig.setRoomLength(roomLength_num);
-        storedConfig.setRoomWidth(roomWidth_num);
-        storedConfig.setWallType(wallType_txt);
+        storedConfig.setName(nameData);
+        storedConfig.setSystemType(systemTypeData);
+        storedConfig.setRoomLength(roomLengthData);
+        storedConfig.setRoomWidth(roomWidthData);
+        storedConfig.setWallMaterial(wallMaterialData);
 
         AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
 

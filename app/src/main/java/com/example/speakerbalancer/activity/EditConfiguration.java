@@ -18,7 +18,7 @@ import com.example.speakerbalancer.data.StoredConfig;
 public class EditConfiguration extends AppCompatActivity {
     int id, borderHeight, borderWidth, borderOriginal;
     StoredConfig config;
-    TextView name, systemType, roomLength, roomWidth, wallType, boxLengthDisplay, boxWidthDisplay;
+    TextView nameText, systemTypeText, roomLengthText, roomWidthText, wallMaterialText, boxLengthDisplay, boxWidthDisplay;
     ConstraintLayout border;
 
     @Override
@@ -28,11 +28,11 @@ public class EditConfiguration extends AppCompatActivity {
         id = getIntent().getExtras().getInt("id");
         config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 
-        name = findViewById(R.id.name);
-        systemType = findViewById(R.id.systemType);
-        roomLength = findViewById(R.id.roomLength);
-        roomWidth = findViewById(R.id.roomWidth);
-        wallType = findViewById(R.id.wallType);
+        nameText = findViewById(R.id.nameInput);
+        systemTypeText = findViewById(R.id.systemTypeSpinner);
+        roomLengthText = findViewById(R.id.roomLengthInput);
+        roomWidthText = findViewById(R.id.roomWidthInput);
+        wallMaterialText = findViewById(R.id.wallTypeSpinner);
 
         border = findViewById(R.id.border);
         border.post(() -> {
@@ -56,11 +56,11 @@ public class EditConfiguration extends AppCompatActivity {
     }
 
     protected void setData() {
-        if (name != null) name.setText(config.getName());
-        if (systemType != null) systemType.setText(config.getSystemType());
-        if (roomLength != null) roomLength.setText(String.valueOf(config.getRoomLength()));
-        if (roomWidth != null) roomWidth.setText(String.valueOf(config.getRoomWidth()));
-        if (wallType != null) wallType.setText(config.getWallType());
+        if (nameText != null) nameText.setText(config.getName());
+        if (systemTypeText != null) systemTypeText.setText(config.getSystemType().name);
+        if (roomLengthText != null) roomLengthText.setText(String.valueOf(config.getRoomLength()));
+        if (roomWidthText != null) roomWidthText.setText(String.valueOf(config.getRoomWidth()));
+        if (wallMaterialText != null) wallMaterialText.setText(config.getWallMaterial());
     }
 
     protected void setRoom() {
@@ -92,9 +92,9 @@ public class EditConfiguration extends AppCompatActivity {
         // X Create specific speaker classes that extend Speaker abstract class
         // X Improve system type logic
         //  X Make it easier to add new system types
-        //  ~ Update layout
-        //  ~ Update all necessary variables
-        //  ~ Creating new layout creates array of all speakers
+        //  X Update layouts
+        //  X Update all necessary variables
+        //  X Creating new layout creates array of all speakers
         //  ~ Updating speaker types re-initializes the array
         // - Have different representations for each type of speaker
         // - Make speakers movable
@@ -102,8 +102,8 @@ public class EditConfiguration extends AppCompatActivity {
         // - Display list of speakers on EditSpeakerLayout activity in a table
         // - Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
-        int repeats;
-        switch (config.getSystemType()) {
+        int repeats = 4;
+        switch (config.getSystemType().name) {
             case "3.1":
                 repeats = 1;
                 break;
@@ -112,9 +112,6 @@ public class EditConfiguration extends AppCompatActivity {
                 break;
             case "7.1":
                 repeats = 3;
-                break;
-            default:
-                repeats = 4;
                 break;
         }
         for (int i = 0; i < repeats; i++) createSpeakerBox(i);
