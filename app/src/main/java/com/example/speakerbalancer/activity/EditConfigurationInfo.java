@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.speakerbalancer.R;
+import com.example.speakerbalancer.WallMaterial;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
 import com.example.speakerbalancer.systems.SpeakerSystem;
@@ -27,10 +28,10 @@ public class EditConfigurationInfo extends NewConfiguration {
         systemTypeSpinner.setSelection(Arrays.asList(systemNames).indexOf(config.getSystemType().name));
         if (roomLengthInput != null) roomLengthInput.setText(String.valueOf(config.getRoomLength()));
         if (roomWidthInput != null) roomWidthInput.setText(String.valueOf(config.getRoomWidth()));
-        wallMaterialSpinner.setSelection(config.getWallTypeFromArray(getApplicationContext(), config.getWallMaterial()));
+        wallMaterialSpinner.setSelection(Arrays.asList(WallMaterial.values()).indexOf(config.getWallMaterial()));
     }
 
-    protected void confirmSuccess(String nameData, String wallMaterialData) {
+    protected void confirmSuccess() {
         SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
         if (!config.getSystemType().name.equals(systemTypeData.name)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditConfigurationInfo.this);
@@ -39,17 +40,20 @@ public class EditConfigurationInfo extends NewConfiguration {
             alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
                     (dialog, which) -> {
                         // Resetting speaker positions will go here
-                        saveChanges(nameData, systemTypeData, wallMaterialData);
+                        saveChanges();
                     });
             alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } else saveChanges(nameData, systemTypeData, wallMaterialData);
+        } else saveChanges();
     }
 
-    private void saveChanges(String nameData, SpeakerSystem systemTypeData, String wallMaterialData) {
+    private void saveChanges() {
+        String nameData = nameInput.getText().toString().trim();
+        SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
+        WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
 
         StoredConfig storedConfig = new StoredConfig();
 

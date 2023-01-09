@@ -14,6 +14,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.speakerbalancer.R;
+import com.example.speakerbalancer.WallMaterial;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
 import com.example.speakerbalancer.systems.SpeakerSystem;
@@ -51,15 +52,15 @@ public class NewConfiguration extends AppCompatActivity {
             systemNames[systemObjects.indexOf(system)] = system.name;
         }
 
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
+        ArrayAdapter<String> systemTypeSpinnerAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, systemNames);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        systemTypeSpinner.setAdapter(spinnerAdapter);
+        systemTypeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        systemTypeSpinner.setAdapter(systemTypeSpinnerAdapter);
 
         systemTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                systemTypeSpinnerId = (int) id;
+                systemTypeSpinnerId = position;
             }
 
             @Override
@@ -67,14 +68,19 @@ public class NewConfiguration extends AppCompatActivity {
                 systemTypeSpinnerId = 0;
             }
         });
+
+        ArrayAdapter<WallMaterial> wallMaterialSpinnerAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, WallMaterial.values());
+        wallMaterialSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        wallMaterialSpinner.setAdapter(wallMaterialSpinnerAdapter);
     }
 
     protected void saveData(int id) {
         String nameString = nameInput.getText().toString().trim();
-        String systemTypeString = systemTypeSpinner.getSelectedItem().toString().trim();
+        // String systemTypeString = systemTypeSpinner.getSelectedItem().toString().trim();
         String roomLengthString = roomLengthInput.getText().toString();
         String roomWidthString = roomWidthInput.getText().toString();
-        String wallMaterialString = wallMaterialSpinner.getSelectedItem().toString().trim();
+        // String wallMaterialString = wallMaterialSpinner.getSelectedItem().toString().trim();
 
         String errorMessage = getString(R.string.badInput);
 
@@ -96,14 +102,16 @@ public class NewConfiguration extends AppCompatActivity {
         if (!errorMessage.equals(getString(R.string.badInput))) {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
         } else {
-            confirmSuccess(nameString, wallMaterialString);
+            confirmSuccess();
         }
     }
 
-    protected void confirmSuccess(String nameData, String wallMaterialData) {
+    protected void confirmSuccess() {
+        String nameData = nameInput.getText().toString().trim();
         SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
+        WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
 
         StoredConfig storedConfig = new StoredConfig();
 

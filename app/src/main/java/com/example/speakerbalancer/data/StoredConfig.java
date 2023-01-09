@@ -1,15 +1,11 @@
 package com.example.speakerbalancer.data;
 
-import android.content.Context;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.speakerbalancer.R;
+import com.example.speakerbalancer.WallMaterial;
 import com.example.speakerbalancer.systems.SpeakerSystem;
-
-import java.util.Arrays;
 
 @Entity(tableName = "config_table")
 public class StoredConfig {
@@ -29,7 +25,7 @@ public class StoredConfig {
     public int roomWidth;
 
     @ColumnInfo(name = "wall_material")
-    public String wallMaterial;
+    public WallMaterial wallMaterial;
 
     public int getId() {
         return id;
@@ -71,16 +67,11 @@ public class StoredConfig {
         this.roomWidth = roomWidth;
     }
 
-    public String getWallMaterial() {
+    public WallMaterial getWallMaterial() {
         return wallMaterial;
     }
 
-    public int getWallTypeFromArray(Context context, String wallType) {
-        String[] wallTypes = context.getResources().getStringArray(R.array.wallTypes);
-        return Arrays.asList(wallTypes).indexOf(wallType);
-    }
-
-    public void setWallMaterial(String wallMaterial) {
+    public void setWallMaterial(WallMaterial wallMaterial) {
         this.wallMaterial = wallMaterial;
     }
 }

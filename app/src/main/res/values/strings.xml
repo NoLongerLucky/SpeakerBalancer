@@ -10,12 +10,6 @@
     <string name="noInput">" not specified"</string>
     <string name="badInput">Invalid Input:</string>
     <string name="dataSaved">Data saved</string>
-    <string-array name="wallTypes">
-        <item>Drywall</item>
-        <item>Brick</item>
-        <item>Glass</item>
-        <item>Acoustic Paneling</item>
-    </string-array>
     <string name="cancel">Cancel</string>
     <string name="delConfig">Delete Configuration</string>
     <string name="delConfigMsg">Are you sure you want to delete this configuration? This cannot be done.</string>

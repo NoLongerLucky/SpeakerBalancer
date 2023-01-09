@@ -141,12 +141,12 @@
                 android:id="@+id/wallTypeSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/wallTypes"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:spinnerMode="dropdown"
-                android:textColorHint="#757575" />
+                android:textColorHint="#757575"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <Button
