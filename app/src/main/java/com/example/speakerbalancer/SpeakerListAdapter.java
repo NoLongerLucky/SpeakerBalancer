@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,11 +36,10 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SpeakerListAdapter.ViewHolder holder, final int position) {
-        String speakerName = list.get(position).name;
-        String speakerId = list.get(position).channel.id;
+        holder.speakerImage.setImageResource(list.get(position).imageId);
 
-        holder.speakerName.setText(speakerName);
-        holder.speakerId.setText(speakerId);
+        holder.speakerName.setText(list.get(position).name);
+        holder.speakerId.setText(list.get(position).channel.id);
 
         holder.moveSpeaker.setOnClickListener(view -> moveItemClickListener.onItemMove(list.get(position).name, list.get(position).channel.id, holder.moveSpeaker));
         holder.editSpeakerInfo.setOnClickListener(view -> editItemClickListener.onItemEdit(list.get(position).name, list.get(position).channel.id));
@@ -51,12 +51,14 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView speakerImage;
         TextView speakerName, speakerId;
         Button moveSpeaker, editSpeakerInfo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            speakerImage = itemView.findViewById(R.id.speakerImage);
             speakerName = itemView.findViewById(R.id.speakerName);
             speakerId = itemView.findViewById(R.id.speakerId);
             moveSpeaker = itemView.findViewById(R.id.moveSpeaker);
