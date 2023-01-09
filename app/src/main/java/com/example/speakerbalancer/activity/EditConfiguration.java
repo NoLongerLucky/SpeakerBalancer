@@ -19,7 +19,7 @@ public class EditConfiguration extends AppCompatActivity {
     int id, borderHeight, borderWidth, borderOriginal;
     StoredConfig config;
     TextView nameText, systemTypeText, roomLengthText, roomWidthText, wallMaterialText, boxLengthDisplay, boxWidthDisplay;
-    ConstraintLayout border;
+    ConstraintLayout border, speakerBorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class EditConfiguration extends AppCompatActivity {
             borderHeight = borderWidth = borderOriginal = border.getMeasuredHeight();
             setRoom();
         });
+        speakerBorder = findViewById(R.id.speakerBorder);
 
         setData();
     }
@@ -102,10 +103,11 @@ public class EditConfiguration extends AppCompatActivity {
         // - Display list of speakers on EditSpeakerLayout activity in a table
         // - Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
+        speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
         if (!config.getSystemType().lfe.isChecked()) {
-            border.removeView(findViewById(101 + config.getSystemType().amount));
-            border.removeView(findViewById(201 + config.getSystemType().amount));
+            speakerBorder.removeView(findViewById(101 + config.getSystemType().amount));
+            speakerBorder.removeView(findViewById(201 + config.getSystemType().amount));
         }
     }
 
@@ -114,23 +116,23 @@ public class EditConfiguration extends AppCompatActivity {
         box.setId(101 + index);
         box.setBackgroundColor(Color.parseColor("#000000"));
         box.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-        border.addView(box, index);
+        speakerBorder.addView(box, index);
 
         TextView text = new TextView(this);
         text.setId(201 + index);
         text.setText(config.getSystemType().speakers[index].channel.id);
         text.setTextColor(Color.parseColor("#FFFFFF"));
-        border.addView(text, index);
+        speakerBorder.addView(text, index);
 
         ConstraintSet set = new ConstraintSet();
-        set.clone(border);
-        set.connect(box.getId(), ConstraintSet.TOP, border.getId(), ConstraintSet.TOP, 100 * index);
-        set.connect(box.getId(), ConstraintSet.LEFT, border.getId(), ConstraintSet.LEFT, 30);
+        set.clone(speakerBorder);
+        set.connect(box.getId(), ConstraintSet.TOP, speakerBorder.getId(), ConstraintSet.TOP, 100 * index);
+        set.connect(box.getId(), ConstraintSet.LEFT, speakerBorder.getId(), ConstraintSet.LEFT, 30);
         set.centerHorizontally(text.getId(), box.getId(), ConstraintSet.LEFT, 0, box.getId(), ConstraintSet.RIGHT, 0, 0.5F);
         set.centerVertically(text.getId(), box.getId(), ConstraintSet.TOP, 0, box.getId(), ConstraintSet.BOTTOM, 0, 0.5F);
-        set.applyTo(border);
+        set.applyTo(speakerBorder);
 
-        findViewById(101 + index).bringToFront();
+        speakerBorder.bringToFront();
         findViewById(201 + index).bringToFront();
     }
 
