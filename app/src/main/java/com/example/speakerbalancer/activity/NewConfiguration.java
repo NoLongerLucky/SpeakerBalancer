@@ -105,7 +105,6 @@ public class NewConfiguration extends AppCompatActivity {
     protected void confirmSuccess() {
         String nameData = nameInput.getText().toString().trim();
         SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
-        systemTypeData.lfe.setChecked(lfeCheckbox.isChecked());
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
@@ -114,6 +113,7 @@ public class NewConfiguration extends AppCompatActivity {
 
         storedConfig.setName(nameData);
         storedConfig.setSystemType(systemTypeData);
+        storedConfig.getSystemType().lfe.setChecked(lfeCheckbox.isChecked());
         storedConfig.setRoomLength(roomLengthData);
         storedConfig.setRoomWidth(roomWidthData);
         storedConfig.setWallMaterial(wallMaterialData);

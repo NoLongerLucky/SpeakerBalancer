@@ -53,7 +53,6 @@ public class EditConfigurationInfo extends NewConfiguration {
 
     private void saveChanges(SpeakerSystem systemTypeData) {
         String nameData = nameInput.getText().toString().trim();
-        systemTypeData.lfe.setChecked(lfeCheckbox.isChecked());
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
@@ -63,6 +62,7 @@ public class EditConfigurationInfo extends NewConfiguration {
         storedConfig.setId(id);
         storedConfig.setName(nameData);
         storedConfig.setSystemType(systemTypeData);
+        storedConfig.getSystemType().lfe.setChecked(lfeCheckbox.isChecked());
         storedConfig.setRoomLength(roomLengthData);
         storedConfig.setRoomWidth(roomWidthData);
         storedConfig.setWallMaterial(wallMaterialData);
