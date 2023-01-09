@@ -2,7 +2,6 @@ package com.example.speakerbalancer.activity;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.speakerbalancer.R;
 import com.example.speakerbalancer.WallMaterial;
@@ -43,34 +42,11 @@ public class EditConfigurationInfo extends NewConfiguration {
             alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
                     (dialog, which) -> {
                         // Resetting speaker positions will go here
-                        saveChanges(defaultSystemType);
+                        saveToDatabase(defaultSystemType, id);
                     });
             alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } else saveChanges(currentSystemType);
-    }
-
-    private void saveChanges(SpeakerSystem systemTypeData) {
-        String nameData = nameInput.getText().toString().trim();
-        int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
-        int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
-        WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
-
-        StoredConfig storedConfig = new StoredConfig();
-
-        storedConfig.setId(id);
-        storedConfig.setName(nameData);
-        storedConfig.setSystemType(systemTypeData);
-        storedConfig.getSystemType().lfe.setChecked(lfeCheckbox.isChecked());
-        storedConfig.setRoomLength(roomLengthData);
-        storedConfig.setRoomWidth(roomWidthData);
-        storedConfig.setWallMaterial(wallMaterialData);
-
-        AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
-
-        Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
-
-        finish();
+        } else saveToDatabase(currentSystemType, id);
     }
 }

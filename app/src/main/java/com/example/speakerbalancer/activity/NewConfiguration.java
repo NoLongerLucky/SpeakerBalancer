@@ -103,14 +103,23 @@ public class NewConfiguration extends AppCompatActivity {
     }
 
     protected void confirmSuccess() {
-        String nameData = nameInput.getText().toString().trim();
         SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
+        saveToDatabase(systemTypeData, -1);
+
+        Intent i = new Intent(NewConfiguration.this, EditConfiguration.class);
+        i.putExtra("id", AppDatabase.getDatabase(getApplicationContext()).getDao().getNewId());
+        startActivity(i);
+    }
+
+    protected void saveToDatabase(SpeakerSystem systemTypeData, int id) {
+        String nameData = nameInput.getText().toString().trim();
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
 
         StoredConfig storedConfig = new StoredConfig();
 
+        if (id >= 0) storedConfig.setId(id);
         storedConfig.setName(nameData);
         storedConfig.setSystemType(systemTypeData);
         storedConfig.getSystemType().lfe.setChecked(lfeCheckbox.isChecked());
@@ -120,19 +129,9 @@ public class NewConfiguration extends AppCompatActivity {
 
         AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(storedConfig);
 
-        nameInput.setText("");
-        systemTypeSpinner.setSelection(0);
-        roomLengthInput.setText("");
-        roomWidthInput.setText("");
-        wallMaterialSpinner.setSelection(0);
-
         Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
 
         finish();
-
-        Intent i = new Intent(NewConfiguration.this, EditConfiguration.class);
-        i.putExtra("id", AppDatabase.getDatabase(getApplicationContext()).getDao().getNewId());
-        startActivity(i);
     }
 
     protected String addError(@StringRes int string1, @StringRes int string2) {
