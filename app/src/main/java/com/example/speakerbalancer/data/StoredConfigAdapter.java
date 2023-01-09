@@ -39,13 +39,13 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
         String systemType = context.getString(R.string.systemType) + ": " + list.get(position).getSystemType().getName();
         String roomLength = context.getString(R.string.roomLengthFt) + ": " + list.get(position).getRoomLength();
         String roomWidth = context.getString(R.string.roomWidthFt) + ": " + list.get(position).getRoomWidth();
-        String wallType = context.getString(R.string.wallType) + ": " + list.get(position).getWallMaterial().displayName();
+        String wallMaterial = context.getString(R.string.wallMaterial) + ": " + list.get(position).getWallMaterial().displayName();
 
         holder.name.setText(name);
         holder.systemType.setText(systemType);
         holder.roomLength.setText(roomLength);
         holder.roomWidth.setText(roomWidth);
-        holder.wallType.setText(wallType);
+        holder.wallMaterial.setText(wallMaterial);
 
         holder.edit.setOnClickListener(view -> editItemClickListener.onItemEdit(position, list.get(position).getId()));
         holder.delete.setOnClickListener(view -> deleteItemClickListener.onItemDelete(position, list.get(position).getId()));
@@ -57,7 +57,7 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, systemType, roomLength, roomWidth, wallType;
+        TextView name, systemType, roomLength, roomWidth, wallMaterial;
         Button edit, delete;
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,7 +67,7 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
             systemType = itemView.findViewById(R.id.systemType_load);
             roomLength = itemView.findViewById(R.id.roomLength_load);
             roomWidth = itemView.findViewById(R.id.roomWidth_load);
-            wallType = itemView.findViewById(R.id.wallType_load);
+            wallMaterial = itemView.findViewById(R.id.wallMaterial_load);
             edit = itemView.findViewById(R.id.edit);
             delete = itemView.findViewById(R.id.delete);
         }

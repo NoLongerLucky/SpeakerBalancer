@@ -38,7 +38,7 @@ public class NewConfiguration extends AppCompatActivity {
         lfeCheckbox = findViewById(R.id.lfeCheckbox);
         roomLengthInput = findViewById(R.id.roomLengthInput);
         roomWidthInput = findViewById(R.id.roomWidthInput);
-        wallMaterialSpinner = findViewById(R.id.wallTypeSpinner);
+        wallMaterialSpinner = findViewById(R.id.wallMaterialSpinner);
         confirm = findViewById(R.id.confirm);
         confirm.setOnClickListener(view -> saveData(-1));
 

@@ -15,7 +15,7 @@
     <string name="delConfigMsg">Are you sure you want to delete this configuration? This cannot be done.</string>
     <string name="delYes">Configuration successfully deleted</string>
     <string name="delNo">Deletion canceled</string>
-    <string name="wallType">Wall Material</string>
+    <string name="wallMaterial">Wall Material</string>
     <string name="zeroFirstDigit">\'s first digit cannot be 0</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>

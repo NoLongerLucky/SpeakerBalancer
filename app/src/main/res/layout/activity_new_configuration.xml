@@ -131,20 +131,20 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/wallTypeLayout"
+            android:id="@+id/wallMaterialLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/wallTypeText"
+                android:id="@+id/wallMaterialText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wallType" />
+                android:text="@string/wallMaterial" />
 
             <Spinner
-                android:id="@+id/wallTypeSpinner"
+                android:id="@+id/wallMaterialSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"

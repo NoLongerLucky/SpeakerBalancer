@@ -33,7 +33,7 @@ public class EditConfiguration extends AppCompatActivity {
         systemTypeText = findViewById(R.id.systemTypeSpinner);
         roomLengthText = findViewById(R.id.roomLengthInput);
         roomWidthText = findViewById(R.id.roomWidthInput);
-        wallMaterialText = findViewById(R.id.wallTypeSpinner);
+        wallMaterialText = findViewById(R.id.wallMaterialSpinner);
 
         border = findViewById(R.id.border);
         border.post(() -> {
