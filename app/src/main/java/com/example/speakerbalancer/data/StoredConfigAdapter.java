@@ -39,7 +39,7 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
         String systemType = context.getString(R.string.systemType) + ": " + list.get(position).getSystemType().name;
         String roomLength = context.getString(R.string.roomLengthFt) + ": " + list.get(position).getRoomLength();
         String roomWidth = context.getString(R.string.roomWidthFt) + ": " + list.get(position).getRoomWidth();
-        String wallType = context.getString(R.string.wallType) + ": " + list.get(position).getWallMaterial();
+        String wallType = context.getString(R.string.wallType) + ": " + list.get(position).getWallMaterial().displayName();
 
         holder.name.setText(name);
         holder.systemType.setText(systemType);

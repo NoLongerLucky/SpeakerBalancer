@@ -60,7 +60,7 @@ public class EditConfiguration extends AppCompatActivity {
         if (systemTypeText != null) systemTypeText.setText(config.getSystemType().name);
         if (roomLengthText != null) roomLengthText.setText(String.valueOf(config.getRoomLength()));
         if (roomWidthText != null) roomWidthText.setText(String.valueOf(config.getRoomWidth()));
-        if (wallMaterialText != null) wallMaterialText.setText(config.getWallMaterial().toString());
+        if (wallMaterialText != null) wallMaterialText.setText(config.getWallMaterial().displayName());
     }
 
     protected void setRoom() {
