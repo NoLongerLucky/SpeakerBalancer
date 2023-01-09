@@ -115,7 +115,7 @@ public class EditConfiguration extends AppCompatActivity {
         View box = new View(this);
         box.setId(101 + index);
         box.setBackgroundColor(Color.parseColor("#000000"));
-        box.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+        box.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
         speakerBorder.addView(box, index);
 
         TextView text = new TextView(this);
@@ -126,8 +126,8 @@ public class EditConfiguration extends AppCompatActivity {
 
         ConstraintSet set = new ConstraintSet();
         set.clone(speakerBorder);
-        set.connect(box.getId(), ConstraintSet.TOP, speakerBorder.getId(), ConstraintSet.TOP, 100 * index);
-        set.connect(box.getId(), ConstraintSet.LEFT, speakerBorder.getId(), ConstraintSet.LEFT, 30);
+        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, (float) config.getSystemType().speakers[index].channel.xBias);
+        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, (float) config.getSystemType().speakers[index].channel.yBias);
         set.centerHorizontally(text.getId(), box.getId(), ConstraintSet.LEFT, 0, box.getId(), ConstraintSet.RIGHT, 0, 0.5F);
         set.centerVertically(text.getId(), box.getId(), ConstraintSet.TOP, 0, box.getId(), ConstraintSet.BOTTOM, 0, 0.5F);
         set.applyTo(speakerBorder);
