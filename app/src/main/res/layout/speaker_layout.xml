@@ -16,14 +16,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <TextView
+            android:id="@+id/boxLengthDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:background="@color/cardview_dark_background"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/border"
+            app:layout_constraintStart_toEndOf="@+id/border"
+            app:layout_constraintTop_toTopOf="@+id/border" />
+
+        <TextView
+            android:id="@+id/boxWidthDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="@color/cardview_dark_background"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/border"
+            app:layout_constraintEnd_toEndOf="@+id/border"
+            app:layout_constraintStart_toStartOf="@+id/border" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/border"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,28 +100,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/boxLengthDisplay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:background="@color/cardview_dark_background"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/bottomWall"
-                app:layout_constraintStart_toEndOf="@+id/leftWall"
-                app:layout_constraintTop_toBottomOf="@+id/topWall" />
-
-            <TextView
-                android:id="@+id/boxWidthDisplay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@color/cardview_dark_background"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/rightWall"
-                app:layout_constraintStart_toEndOf="@+id/leftWall"
-                app:layout_constraintTop_toBottomOf="@+id/topWall" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
