@@ -41,8 +41,18 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
         holder.speakerName.setText(list.get(position).name);
         holder.speakerId.setText(list.get(position).channel.id);
 
-        holder.moveSpeaker.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(list.get(position).name, list.get(position).channel.id, holder.moveSpeaker));
-        holder.editSpeakerInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(list.get(position).name, list.get(position).channel.id));
+        holder.moveSpeaker.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
+                list.get(position).name,
+                list.get(position).channel.id,
+                holder.moveSpeaker,
+                position,
+                list.get(position).channel.xBias,
+                list.get(position).channel.yBias
+        ));
+        holder.editSpeakerInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(
+                list.get(position).name,
+                list.get(position).channel.id
+        ));
     }
 
     @Override
@@ -67,7 +77,7 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     }
 
     public interface MoveItemClickListener {
-        void onSpeakerMove(String name, String id, Button button);
+        void onSpeakerMove(String name, String id, Button button, int position, double xBias, double yBias);
     }
 
     public interface EditItemClickListener {
