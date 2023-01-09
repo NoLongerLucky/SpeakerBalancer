@@ -18,4 +18,16 @@ public class SpeakerSystem {
     protected String notation() {
         return amount + "." + (lfe.isEnabled() ? 1 : 0);
     }
+
+    public int findIndex() {
+        SystemDirectory[] values = SystemDirectory.values();
+        for (int i = 0; i < values.length; i++) {
+            if (values[i].speakerSystem.name.equals(this.name)) return i;
+        }
+        return 0;
+    }
+
+    public String getName() {
+        return name + " (" + this.notation() + ")";
+    }
 }

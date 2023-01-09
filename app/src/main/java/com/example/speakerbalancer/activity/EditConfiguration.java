@@ -57,7 +57,7 @@ public class EditConfiguration extends AppCompatActivity {
 
     protected void setData() {
         if (nameText != null) nameText.setText(config.getName());
-        if (systemTypeText != null) systemTypeText.setText(config.getSystemType().name);
+        if (systemTypeText != null) systemTypeText.setText(config.getSystemType().getName());
         if (roomLengthText != null) roomLengthText.setText(String.valueOf(config.getRoomLength()));
         if (roomWidthText != null) roomWidthText.setText(String.valueOf(config.getRoomWidth()));
         if (wallMaterialText != null) wallMaterialText.setText(config.getWallMaterial().displayName());
@@ -103,7 +103,7 @@ public class EditConfiguration extends AppCompatActivity {
         // - Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
         int repeats = 4;
-        switch (config.getSystemType().name) {
+        switch (config.getSystemType().getName()) {
             case "3.1":
                 repeats = 1;
                 break;

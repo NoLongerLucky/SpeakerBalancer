@@ -2,8 +2,6 @@ package com.example.speakerbalancer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,20 +16,12 @@ import com.example.speakerbalancer.WallMaterial;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
 import com.example.speakerbalancer.systems.SpeakerSystem;
-import com.example.speakerbalancer.systems.layouts.Quad;
-import com.example.speakerbalancer.systems.layouts.Stereo;
-import com.example.speakerbalancer.systems.layouts.Surround;
-
-import java.util.Arrays;
-import java.util.List;
+import com.example.speakerbalancer.systems.SystemDirectory;
 
 public class NewConfiguration extends AppCompatActivity {
     EditText nameInput, roomLengthInput, roomWidthInput;
     Spinner systemTypeSpinner, wallMaterialSpinner;
-    int systemTypeSpinnerId;
     Button confirm;
-    List<SpeakerSystem> systemObjects;
-    String[] systemNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,28 +36,10 @@ public class NewConfiguration extends AppCompatActivity {
         confirm = findViewById(R.id.confirm);
         confirm.setOnClickListener(view -> saveData(-1));
 
-        systemObjects = Arrays.asList(new Stereo(), new Surround(), new Quad());
-        systemNames = new String[systemObjects.size()];
-        for (SpeakerSystem system : systemObjects) {
-            systemNames[systemObjects.indexOf(system)] = system.name;
-        }
-
-        ArrayAdapter<String> systemTypeSpinnerAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, systemNames);
+        ArrayAdapter<SystemDirectory> systemTypeSpinnerAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, SystemDirectory.values());
         systemTypeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         systemTypeSpinner.setAdapter(systemTypeSpinnerAdapter);
-
-        systemTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                systemTypeSpinnerId = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                systemTypeSpinnerId = 0;
-            }
-        });
 
         ArrayAdapter<WallMaterial> wallMaterialSpinnerAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, WallMaterial.values());
@@ -108,7 +80,7 @@ public class NewConfiguration extends AppCompatActivity {
 
     protected void confirmSuccess() {
         String nameData = nameInput.getText().toString().trim();
-        SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
+        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();

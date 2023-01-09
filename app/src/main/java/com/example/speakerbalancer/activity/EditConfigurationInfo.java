@@ -9,6 +9,7 @@ import com.example.speakerbalancer.WallMaterial;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
 import com.example.speakerbalancer.systems.SpeakerSystem;
+import com.example.speakerbalancer.systems.SystemDirectory;
 
 import java.util.Arrays;
 
@@ -25,14 +26,14 @@ public class EditConfigurationInfo extends NewConfiguration {
         config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 
         if (nameInput != null) nameInput.setText(config.getName());
-        systemTypeSpinner.setSelection(Arrays.asList(systemNames).indexOf(config.getSystemType().name));
+        systemTypeSpinner.setSelection(config.getSystemType().findIndex());
         if (roomLengthInput != null) roomLengthInput.setText(String.valueOf(config.getRoomLength()));
         if (roomWidthInput != null) roomWidthInput.setText(String.valueOf(config.getRoomWidth()));
         wallMaterialSpinner.setSelection(Arrays.asList(WallMaterial.values()).indexOf(config.getWallMaterial()));
     }
 
     protected void confirmSuccess() {
-        SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
+        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
         if (!config.getSystemType().name.equals(systemTypeData.name)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditConfigurationInfo.this);
             alertDialogBuilder.setTitle(getString(R.string.changedSystem));
@@ -50,7 +51,7 @@ public class EditConfigurationInfo extends NewConfiguration {
 
     private void saveChanges() {
         String nameData = nameInput.getText().toString().trim();
-        SpeakerSystem systemTypeData = systemObjects.get(systemTypeSpinnerId);
+        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();
