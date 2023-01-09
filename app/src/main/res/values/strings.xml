@@ -31,4 +31,9 @@
     <string name="y">Y</string>
     <string name="subwoofer">Subwoofer?</string>
     <string name="noConfig">No configurations have been created.</string>
+    <string name="speakerName">Speaker Name</string>
+    <string name="speakerId">Speaker ID</string>
+    <string name="editSpeakerInfo">Edit Speaker Info</string>
+    <string name="moveSpeaker">Move Speaker</string>
+    <string name="tweeter">Tweeter</string>
 </resources>

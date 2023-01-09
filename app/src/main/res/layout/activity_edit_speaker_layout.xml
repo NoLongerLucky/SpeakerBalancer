@@ -1,85 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
     tools:context=".activity.EditSpeakerLayout">
 
-    <include
-        android:id="@+id/speakerLayoutRef"
-        layout="@layout/speaker_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/debug"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
-
     <LinearLayout
-        android:id="@+id/seekBarList"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/lineX"
+        <include
+            android:id="@+id/speakerLayoutRef"
+            layout="@layout/speaker_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textX"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/x" />
-
-            <SeekBar
-                android:id="@+id/seekBarX"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="16" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
 
         <LinearLayout
-            android:id="@+id/lineY"
+            android:id="@+id/seekBarList"
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textY"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/lineX"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/y" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <SeekBar
-                android:id="@+id/seekBarY"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textX"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/x" />
+
+                <SeekBar
+                    android:id="@+id/seekBarX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineY"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="16" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textY"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/y" />
+
+                <SeekBar
+                    android:id="@+id/seekBarY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16" />
+            </LinearLayout>
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/saveLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saveLayout" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="?attr/dividerHorizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/speakerList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                tools:listitem="@layout/rv_speaker_list">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/saveLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/saveLayout" />
-
-</LinearLayout>
+</ScrollView>

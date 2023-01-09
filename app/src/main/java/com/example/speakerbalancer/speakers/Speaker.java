@@ -3,7 +3,7 @@ package com.example.speakerbalancer.speakers;
 import com.example.speakerbalancer.systems.Channel;
 
 public class Speaker {
-    protected String name;
+    public String name;
     protected int minRange, maxRange;
     public final Channel channel;
 
