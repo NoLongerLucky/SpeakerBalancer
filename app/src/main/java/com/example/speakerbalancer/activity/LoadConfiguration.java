@@ -47,11 +47,11 @@ public class LoadConfiguration extends AppCompatActivity {
 
     private void getData() {
         List<StoredConfig> list = AppDatabase.getDatabase(getApplicationContext()).getDao().getAllData();
-        recyclerView.setAdapter(new StoredConfigAdapter(getApplicationContext(), list, (position, id) -> {
+        recyclerView.setAdapter(new StoredConfigAdapter(getApplicationContext(), list, (id) -> {
             Intent i = new Intent(LoadConfiguration.this, EditConfiguration.class);
             i.putExtra("id", id);
             startActivity(i);
-        }, (position, id) -> {
+        }, (id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoadConfiguration.this);
             alertDialogBuilder.setTitle(getString(R.string.delConfig));
             alertDialogBuilder.setMessage(getString(R.string.delConfigMsg));

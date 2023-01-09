@@ -40,4 +40,9 @@
     <string name="_0_0">0.0</string>
     <string name="movingSpeaker">Moving %1$s %2$s</string>
     <string name="editingSpeaker">Editing %1$s %2$s</string>
+    <string name="nameDisplay">Name: %1$s</string>
+    <string name="systemTypeDisplay">System Type: %1$s</string>
+    <string name="roomLengthDisplay">Room Length (ft): %1$i</string>
+    <string name="roomWidthDisplay">Room Width (ft): %1$i</string>
+    <string name="wallMaterialDisplay">Wall Material: %1$s</string>
 </resources>

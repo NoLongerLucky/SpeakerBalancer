@@ -30,25 +30,19 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_load_layout, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_load_config, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoredConfigAdapter.ViewHolder holder, final int position) {
-        String name = context.getString(R.string.name) + ": " + list.get(position).getName();
-        String systemType = context.getString(R.string.systemType) + ": " + list.get(position).getSystemType().getName();
-        String roomLength = context.getString(R.string.roomLengthFt) + ": " + list.get(position).getRoomLength();
-        String roomWidth = context.getString(R.string.roomWidthFt) + ": " + list.get(position).getRoomWidth();
-        String wallMaterial = context.getString(R.string.wallMaterial) + ": " + list.get(position).getWallMaterial().displayName();
+        holder.name.setText(context.getString(R.string.nameDisplay, list.get(position).getName()));
+        holder.systemType.setText(context.getString(R.string.systemTypeDisplay, list.get(position).getSystemType().getName()));
+        holder.roomLength.setText(context.getString(R.string.roomLengthDisplay, list.get(position).getRoomLength()));
+        holder.roomWidth.setText(context.getString(R.string.roomWidthDisplay, list.get(position).getRoomWidth()));
+        holder.wallMaterial.setText(context.getString(R.string.wallMaterialDisplay, list.get(position).getWallMaterial().displayName()));
 
-        holder.name.setText(name);
-        holder.systemType.setText(systemType);
-        holder.roomLength.setText(roomLength);
-        holder.roomWidth.setText(roomWidth);
-        holder.wallMaterial.setText(wallMaterial);
-
-        holder.edit.setOnClickListener(view -> editItemClickListener.onItemEdit(position, list.get(position).getId()));
-        holder.delete.setOnClickListener(view -> deleteItemClickListener.onItemDelete(position, list.get(position).getId()));
+        holder.edit.setOnClickListener(view -> editItemClickListener.onConfigEdit(list.get(position).getId()));
+        holder.delete.setOnClickListener(view -> deleteItemClickListener.onConfigDelete(list.get(position).getId()));
     }
 
     @Override
@@ -74,10 +68,10 @@ public class StoredConfigAdapter extends RecyclerView.Adapter<StoredConfigAdapte
     }
 
     public interface EditItemClickListener {
-        void onItemEdit(int position, int id);
+        void onConfigEdit(int id);
     }
 
     public interface DeleteItemClickListener {
-        void onItemDelete(int position, int id);
+        void onConfigDelete(int id);
     }
 }
