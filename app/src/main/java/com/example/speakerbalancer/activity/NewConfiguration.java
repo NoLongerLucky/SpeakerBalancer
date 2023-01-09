@@ -2,8 +2,11 @@ package com.example.speakerbalancer.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -15,12 +18,14 @@ import com.example.speakerbalancer.R;
 import com.example.speakerbalancer.WallMaterial;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.StoredConfig;
+import com.example.speakerbalancer.systems.LFE;
 import com.example.speakerbalancer.systems.SpeakerSystem;
 import com.example.speakerbalancer.systems.SystemDirectory;
 
 public class NewConfiguration extends AppCompatActivity {
     EditText nameInput, roomLengthInput, roomWidthInput;
     Spinner systemTypeSpinner, wallMaterialSpinner;
+    CheckBox lfeCheckbox;
     Button confirm;
 
     @Override
@@ -30,6 +35,7 @@ public class NewConfiguration extends AppCompatActivity {
 
         nameInput = findViewById(R.id.nameInput);
         systemTypeSpinner = findViewById(R.id.systemTypeSpinner);
+        lfeCheckbox = findViewById(R.id.lfeCheckbox);
         roomLengthInput = findViewById(R.id.roomLengthInput);
         roomWidthInput = findViewById(R.id.roomWidthInput);
         wallMaterialSpinner = findViewById(R.id.wallTypeSpinner);
@@ -45,6 +51,24 @@ public class NewConfiguration extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, WallMaterial.values());
         wallMaterialSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         wallMaterialSpinner.setAdapter(wallMaterialSpinnerAdapter);
+
+        systemTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                LFE lfe = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem.lfe;
+                updateCheckbox(lfe);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    protected void updateCheckbox(LFE lfe) {
+        lfeCheckbox.setEnabled(lfe.isEnabled());
+        lfeCheckbox.setChecked(lfe.isChecked() || (lfe.isEnabled() && lfeCheckbox.isChecked()));
     }
 
     protected void saveData(int id) {
@@ -81,6 +105,7 @@ public class NewConfiguration extends AppCompatActivity {
     protected void confirmSuccess() {
         String nameData = nameInput.getText().toString().trim();
         SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
+        systemTypeData.lfe.setChecked(lfeCheckbox.isChecked());
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();

@@ -27,31 +27,33 @@ public class EditConfigurationInfo extends NewConfiguration {
 
         if (nameInput != null) nameInput.setText(config.getName());
         systemTypeSpinner.setSelection(config.getSystemType().findIndex());
+        updateCheckbox(config.getSystemType().lfe);
         if (roomLengthInput != null) roomLengthInput.setText(String.valueOf(config.getRoomLength()));
         if (roomWidthInput != null) roomWidthInput.setText(String.valueOf(config.getRoomWidth()));
         wallMaterialSpinner.setSelection(Arrays.asList(WallMaterial.values()).indexOf(config.getWallMaterial()));
     }
 
     protected void confirmSuccess() {
-        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
-        if (!config.getSystemType().name.equals(systemTypeData.name)) {
+        SpeakerSystem defaultSystemType = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
+        SpeakerSystem currentSystemType = config.getSystemType();
+        if (!currentSystemType.name.equals(defaultSystemType.name)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditConfigurationInfo.this);
             alertDialogBuilder.setTitle(getString(R.string.changedSystem));
             alertDialogBuilder.setMessage(getString(R.string.changedSystemBody));
             alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
                     (dialog, which) -> {
                         // Resetting speaker positions will go here
-                        saveChanges();
+                        saveChanges(defaultSystemType);
                     });
             alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } else saveChanges();
+        } else saveChanges(currentSystemType);
     }
 
-    private void saveChanges() {
+    private void saveChanges(SpeakerSystem systemTypeData) {
         String nameData = nameInput.getText().toString().trim();
-        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
+        systemTypeData.lfe.setChecked(lfeCheckbox.isChecked());
         int roomLengthData = Integer.parseInt(roomLengthInput.getText().toString());
         int roomWidthData = Integer.parseInt(roomWidthInput.getText().toString());
         WallMaterial wallMaterialData = (WallMaterial) wallMaterialSpinner.getSelectedItem();

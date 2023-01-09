@@ -7,7 +7,7 @@ import com.example.speakerbalancer.systems.SpeakerSystem;
 
 public class Surround extends SpeakerSystem {
     public Surround() {
-        super(3, "Surround", false);
+        super(3, "Surround", false, false);
 
         speakers[0] = new Tweeter(Channel.SPEAKER_FRONT_LEFT);
         speakers[1] = new Tweeter(Channel.SPEAKER_FRONT_RIGHT);

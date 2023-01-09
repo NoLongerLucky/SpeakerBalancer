@@ -29,4 +29,5 @@
     <string name="saveLayout">Save Layout</string>
     <string name="x">X</string>
     <string name="y">Y</string>
+    <string name="subwoofer">Subwoofer?</string>
 </resources>

@@ -65,6 +65,12 @@
                 android:spinnerMode="dropdown"
                 android:textColorHint="#757575"
                 tools:ignore="SpeakableTextPresentCheck" />
+
+            <CheckBox
+                android:id="@+id/lfeCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subwoofer" />
         </LinearLayout>
 
         <LinearLayout
