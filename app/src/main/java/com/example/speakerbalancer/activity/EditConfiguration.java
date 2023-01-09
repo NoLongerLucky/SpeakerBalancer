@@ -20,6 +20,7 @@ public class EditConfiguration extends AppCompatActivity {
     StoredConfig config;
     TextView nameText, systemTypeText, roomLengthText, roomWidthText, wallMaterialText, boxLengthDisplay, boxWidthDisplay;
     ConstraintLayout border, speakerBorder;
+    View leftWall, rightWall, topWall, bottomWall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,11 @@ public class EditConfiguration extends AppCompatActivity {
             setRoom();
         });
         speakerBorder = findViewById(R.id.speakerBorder);
+
+        leftWall = findViewById(R.id.leftWall);
+        rightWall = findViewById(R.id.rightWall);
+        topWall = findViewById(R.id.topWall);
+        bottomWall = findViewById(R.id.bottomWall);
 
         setData();
     }
@@ -86,6 +92,11 @@ public class EditConfiguration extends AppCompatActivity {
         String widthDisplay = " " + config.getRoomWidth() + " ft ";
         boxLengthDisplay.setText(lengthDisplay);
         boxWidthDisplay.setText(widthDisplay);
+
+        leftWall.setBackgroundColor(config.getWallMaterial().color);
+        rightWall.setBackgroundColor(config.getWallMaterial().color);
+        topWall.setBackgroundColor(config.getWallMaterial().color);
+        bottomWall.setBackgroundColor(config.getWallMaterial().color);
 
         // Bad code, just a proof of concept
         // TO-DO:

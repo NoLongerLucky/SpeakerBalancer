@@ -1,10 +1,18 @@
 package com.example.speakerbalancer;
 
+import android.graphics.Color;
+
 public enum WallMaterial {
-    DRYWALL,
-    BRICK,
-    GLASS,
-    ACOUSTIC_PANELING;
+    DRYWALL("#C6C9Ca"),
+    BRICK("#DC5539"),
+    GLASS("#A8CCD7"),
+    ACOUSTIC_PANELING("#5462C5");
+
+    public final int color;
+
+    WallMaterial(String color) {
+        this.color = Color.parseColor(String.valueOf(color));
+    }
 
     public String displayName() {
         String str = this.name();
