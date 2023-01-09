@@ -107,12 +107,12 @@ public class EditConfiguration extends AppCompatActivity {
         //  X Update layouts
         //  X Update all necessary variables
         //  X Creating new layout creates array of all speakers
-        //  ~ Updating speaker types re-initializes the array
+        //  X Updating speaker types re-initializes the array
         // X Have different representations for each type of speaker
         // - Make speakers movable
         // - Save speaker positions to database
-        // - Display list of speakers on EditSpeakerLayout activity in a table
-        // - Above list has a button for each entry, selecting it allows speaker to be moved
+        // X Display list of speakers on EditSpeakerLayout activity in a table
+        // X Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
