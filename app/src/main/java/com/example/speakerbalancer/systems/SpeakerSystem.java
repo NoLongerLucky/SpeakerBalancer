@@ -3,7 +3,7 @@ package com.example.speakerbalancer.systems;
 import com.example.speakerbalancer.speakers.Speaker;
 
 public class SpeakerSystem {
-    protected int amount;
+    public int amount;
     public String name;
     protected Speaker[] speakers;
     public LFE lfe;
@@ -25,6 +25,10 @@ public class SpeakerSystem {
             if (values[i].speakerSystem.name.equals(this.name)) return i;
         }
         return 0;
+    }
+
+    public int getAmount() {
+        return amount + (lfe.isChecked() ? 1 : 0);
     }
 
     public String getName() {

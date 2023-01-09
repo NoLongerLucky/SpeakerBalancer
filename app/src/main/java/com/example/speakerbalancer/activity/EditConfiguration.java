@@ -102,33 +102,21 @@ public class EditConfiguration extends AppCompatActivity {
         // - Display list of speakers on EditSpeakerLayout activity in a table
         // - Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
-        int repeats = 4;
-        switch (config.getSystemType().getName()) {
-            case "3.1":
-                repeats = 1;
-                break;
-            case "5.1":
-                repeats = 2;
-                break;
-            case "7.1":
-                repeats = 3;
-                break;
-        }
-        for (int i = 0; i < repeats; i++) createSpeakerBox(i);
+        for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
+        if (!config.getSystemType().lfe.isChecked()) border.removeView(findViewById(101 + config.getSystemType().amount));
     }
 
     protected void createSpeakerBox(int index) {
-        ConstraintLayout mConstraintLayout = findViewById(R.id.border);
-        ConstraintSet set = new ConstraintSet();
         View view = new View(this);
-        view.setId(View.generateViewId());
+        view.setId(101 + index);
         view.setBackgroundColor(Color.parseColor("#000000"));
         view.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-        mConstraintLayout.addView(view,index);
-        set.clone(mConstraintLayout);
-        set.connect(view.getId(), ConstraintSet.TOP, mConstraintLayout.getId(), ConstraintSet.TOP, 100 * index);
-        set.connect(view.getId(), ConstraintSet.LEFT, mConstraintLayout.getId(), ConstraintSet.LEFT, 30);
-        set.applyTo(mConstraintLayout);
+        border.addView(view, index);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(border);
+        set.connect(view.getId(), ConstraintSet.TOP, border.getId(), ConstraintSet.TOP, 100 * index);
+        set.connect(view.getId(), ConstraintSet.LEFT, border.getId(), ConstraintSet.LEFT, 30);
+        set.applyTo(border);
     }
 
     public void launch_editConfigInfo(View v) {
