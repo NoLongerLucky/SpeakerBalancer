@@ -77,7 +77,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     }
 
     private void createSpeakerList() {
-        List<Speaker> list = Arrays.asList(config.getSystemType().speakers);
+        List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
         speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (name, id, button) -> {
             this.selected.setText(getString(R.string.movingSpeaker, name, id));
             if (previousButton == null) previousButton = button;
