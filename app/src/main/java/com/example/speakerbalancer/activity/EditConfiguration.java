@@ -96,27 +96,42 @@ public class EditConfiguration extends AppCompatActivity {
         //  X Update all necessary variables
         //  X Creating new layout creates array of all speakers
         //  ~ Updating speaker types re-initializes the array
-        // - Have different representations for each type of speaker
+        // X Have different representations for each type of speaker
         // - Make speakers movable
         // - Save speaker positions to database
         // - Display list of speakers on EditSpeakerLayout activity in a table
         // - Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
-        if (!config.getSystemType().lfe.isChecked()) border.removeView(findViewById(101 + config.getSystemType().amount));
+        if (!config.getSystemType().lfe.isChecked()) {
+            border.removeView(findViewById(101 + config.getSystemType().amount));
+            border.removeView(findViewById(201 + config.getSystemType().amount));
+        }
     }
 
     protected void createSpeakerBox(int index) {
-        View view = new View(this);
-        view.setId(101 + index);
-        view.setBackgroundColor(Color.parseColor("#000000"));
-        view.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
-        border.addView(view, index);
+        View box = new View(this);
+        box.setId(101 + index);
+        box.setBackgroundColor(Color.parseColor("#000000"));
+        box.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+        border.addView(box, index);
+
+        TextView text = new TextView(this);
+        text.setId(201 + index);
+        text.setText(config.getSystemType().speakers[index].channel.id);
+        text.setTextColor(Color.parseColor("#FFFFFF"));
+        border.addView(text, index);
+
         ConstraintSet set = new ConstraintSet();
         set.clone(border);
-        set.connect(view.getId(), ConstraintSet.TOP, border.getId(), ConstraintSet.TOP, 100 * index);
-        set.connect(view.getId(), ConstraintSet.LEFT, border.getId(), ConstraintSet.LEFT, 30);
+        set.connect(box.getId(), ConstraintSet.TOP, border.getId(), ConstraintSet.TOP, 100 * index);
+        set.connect(box.getId(), ConstraintSet.LEFT, border.getId(), ConstraintSet.LEFT, 30);
+        set.centerHorizontally(text.getId(), box.getId(), ConstraintSet.LEFT, 0, box.getId(), ConstraintSet.RIGHT, 0, 0.5F);
+        set.centerVertically(text.getId(), box.getId(), ConstraintSet.TOP, 0, box.getId(), ConstraintSet.BOTTOM, 0, 0.5F);
         set.applyTo(border);
+
+        findViewById(101 + index).bringToFront();
+        findViewById(201 + index).bringToFront();
     }
 
     public void launch_editConfigInfo(View v) {

@@ -5,7 +5,7 @@ import com.example.speakerbalancer.systems.Channel;
 public class Speaker {
     protected String name;
     protected int minRange, maxRange;
-    protected Channel channel;
+    public final Channel channel;
 
     Speaker(String name, int minRange, int maxRange, Channel channel) {
         this.name = name;

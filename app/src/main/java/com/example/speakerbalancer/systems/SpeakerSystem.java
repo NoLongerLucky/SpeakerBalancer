@@ -5,7 +5,7 @@ import com.example.speakerbalancer.speakers.Speaker;
 public class SpeakerSystem {
     public int amount;
     public String name;
-    protected Speaker[] speakers;
+    public Speaker[] speakers;
     public LFE lfe;
 
     public SpeakerSystem(int amount, String name, boolean enableLFE, boolean checkLFE) {
