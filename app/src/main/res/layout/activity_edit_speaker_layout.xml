@@ -22,10 +22,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/noSpeakerSelected" />
+
+        <TextView
             android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:text="@string/_0_0" />
 
         <LinearLayout
             android:id="@+id/seekBarList"

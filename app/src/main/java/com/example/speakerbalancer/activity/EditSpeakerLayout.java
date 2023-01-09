@@ -1,6 +1,7 @@
 package com.example.speakerbalancer.activity;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -16,8 +17,9 @@ import java.util.List;
 
 public class EditSpeakerLayout extends EditConfiguration {
     SeekBar seekBarX, seekBarY;
-    TextView position;
+    TextView selected, position;
     RecyclerView speakerList;
+    Button previousButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class EditSpeakerLayout extends EditConfiguration {
 
         seekBarX = findViewById(R.id.seekBarX);
         seekBarY = findViewById(R.id.seekBarY);
+        selected = findViewById(R.id.selected);
         position = findViewById(R.id.position);
         speakerList = findViewById(R.id.speakerList);
 
@@ -75,10 +78,15 @@ public class EditSpeakerLayout extends EditConfiguration {
 
     private void createSpeakerList() {
         List<Speaker> list = Arrays.asList(config.getSystemType().speakers);
-        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (position, id) -> {
-            this.position.setText("Move Button Clicked");
-        }, (position, id) -> {
-            this.position.setText("Edit Button Clicked");
+        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (name, id, button) -> {
+            this.selected.setText(getString(R.string.movingSpeaker, name, id));
+            if (previousButton == null) previousButton = button;
+            previousButton.setEnabled(true);
+            button.setEnabled(false);
+            previousButton = button;
+        }, (name, id) -> {
+            this.selected.setText(getString(R.string.editingSpeaker, name, id));
+            previousButton.setEnabled(true);
         }));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
