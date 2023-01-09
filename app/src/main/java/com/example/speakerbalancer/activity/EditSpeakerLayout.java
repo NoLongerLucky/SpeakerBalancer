@@ -89,5 +89,6 @@ public class EditSpeakerLayout extends EditConfiguration {
             previousButton.setEnabled(true);
         }));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        speakerList.setNestedScrollingEnabled(false);
     }
 }
