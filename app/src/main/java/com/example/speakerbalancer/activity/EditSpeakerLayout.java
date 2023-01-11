@@ -18,7 +18,7 @@ import java.util.List;
 
 public class EditSpeakerLayout extends EditConfiguration {
     SeekBar seekBarX, seekBarY;
-    TextView selected, position;
+    TextView selected, positionX, positionY;
     RecyclerView speakerList;
     Button previousButton;
     int selectedSpeaker;
@@ -30,7 +30,8 @@ public class EditSpeakerLayout extends EditConfiguration {
         seekBarX = findViewById(R.id.seekBarX);
         seekBarY = findViewById(R.id.seekBarY);
         selected = findViewById(R.id.selected);
-        position = findViewById(R.id.position);
+        positionX = findViewById(R.id.positionX);
+        positionY = findViewById(R.id.positionY);
         speakerList = findViewById(R.id.speakerList);
 
         seekBarX.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -38,7 +39,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int num = config.getRoomWidth() * progress;
                 double text = (double)num / 100;
-                position.setText(String.valueOf(text));
+                positionX.setText(String.valueOf(text));
 
                 float bias = (float) progress / 100;
                 ConstraintSet set = new ConstraintSet();
@@ -63,7 +64,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int num = config.getRoomLength() * progress;
                 double text = (double)num / 100;
-                position.setText(String.valueOf(text));
+                positionY.setText(String.valueOf(text));
 
                 float bias = (float) progress / 100;
                 ConstraintSet set = new ConstraintSet();
