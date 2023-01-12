@@ -15,7 +15,8 @@ public enum Channel {
 
     public final String id;
     public final int index;
-    public final double xBias, yBias;
+    public double xBias;
+    public double yBias;
 
     Channel(String id, int index, double xBias, double yBias) {
         this.id = id;

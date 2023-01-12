@@ -41,11 +41,13 @@ public class EditSpeakerLayout extends EditConfiguration {
                 double text = (double)num / 100;
                 positionX.setText(String.valueOf(text));
 
+                if (!fromUser) return;
                 float bias = (float) progress / 100;
                 ConstraintSet set = new ConstraintSet();
                 set.clone(speakerBorder);
-                set.centerHorizontally(selectedSpeaker, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
+                set.centerHorizontally(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
                 set.applyTo(speakerBorder);
+                config.getSystemType().getSpeakers()[selectedSpeaker].channel.xBias = bias;
             }
 
             @Override
@@ -66,11 +68,13 @@ public class EditSpeakerLayout extends EditConfiguration {
                 double text = (double)num / 100;
                 positionY.setText(String.valueOf(text));
 
+                if (!fromUser) return;
                 float bias = (float) progress / 100;
                 ConstraintSet set = new ConstraintSet();
                 set.clone(speakerBorder);
-                set.centerVertically(selectedSpeaker, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
+                set.centerVertically(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
                 set.applyTo(speakerBorder);
+                config.getSystemType().getSpeakers()[selectedSpeaker].channel.yBias = bias;
             }
 
             @Override
@@ -95,11 +99,10 @@ public class EditSpeakerLayout extends EditConfiguration {
         List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
         speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (name, id, button, position, xBias, yBias) -> {
             this.selected.setText(getString(R.string.movingSpeaker, name, id));
-            if (previousButton == null) previousButton = button;
-            previousButton.setEnabled(true);
+            (previousButton == null ? button : previousButton).setEnabled(true);
             button.setEnabled(false);
             previousButton = button;
-            selectedSpeaker = position + 101;
+            selectedSpeaker = position;
             seekBarX.setProgress((int) (xBias * 100));
             seekBarY.setProgress((int) (yBias * 100));
         }, (name, id) -> {
