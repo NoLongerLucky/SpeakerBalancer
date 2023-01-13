@@ -23,6 +23,14 @@ public enum Channel {
         this.xBias = xBias;
         this.yBias = yBias;
     }
+
+    public double getxBias() {
+        return xBias;
+    }
+
+    public double getyBias() {
+        return yBias;
+    }
 }
 
 // Information provided by a Wikipedia article

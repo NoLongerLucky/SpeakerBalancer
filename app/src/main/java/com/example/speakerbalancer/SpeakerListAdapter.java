@@ -42,16 +42,12 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
         holder.speakerId.setText(list.get(position).channel.id);
 
         holder.moveSpeaker.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
-                list.get(position).name,
-                list.get(position).channel.id,
+                list.get(position),
                 holder.moveSpeaker,
-                position,
-                list.get(position).channel.xBias,
-                list.get(position).channel.yBias
+                position
         ));
         holder.editSpeakerInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(
-                list.get(position).name,
-                list.get(position).channel.id
+                list.get(position)
         ));
     }
 
@@ -77,10 +73,10 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     }
 
     public interface MoveItemClickListener {
-        void onSpeakerMove(String name, String id, Button button, int position, double xBias, double yBias);
+        void onSpeakerMove(Speaker speaker, Button button, int position);
     }
 
     public interface EditItemClickListener {
-        void onSpeakerEdit(String name, String id);
+        void onSpeakerEdit(Speaker speaker);
     }
 }

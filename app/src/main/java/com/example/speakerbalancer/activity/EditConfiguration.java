@@ -110,8 +110,8 @@ public class EditConfiguration extends AppCompatActivity {
         //  X Updating speaker types re-initializes the array
         // X Have different representations for each type of speaker
         // X Make speakers movable
-        //  ~ Fix bug where they reset position when selected again
-        //  ~ Fix bug where position display doesn't always update correctly
+        //  X Fix bug where they reset position when selected again
+        //  X Fix bug where position display doesn't always update correctly
         //  ~ Add button to reset position(s)
         // - Save speaker positions to database
         // X Display list of speakers on EditSpeakerLayout activity in a table

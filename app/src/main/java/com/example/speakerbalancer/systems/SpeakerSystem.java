@@ -42,4 +42,20 @@ public class SpeakerSystem {
         if (!lfe.isChecked()) arr = Arrays.copyOf(arr, arr.length - 1);
         return arr;
     }
+
+    public double[] getxBiases() {
+        double[] arr = new double[speakers.length];
+        for (int i = 0; i < speakers.length; i++) {
+            arr[i] = (int) speakers[i].channel.getxBias();
+        }
+        return arr;
+    }
+
+    public double[] getyBiases() {
+        double[] arr = new double[speakers.length];
+        for (int i = 0; i < speakers.length; i++) {
+            arr[i] = (int) speakers[i].channel.getyBias();
+        }
+        return arr;
+    }
 }
