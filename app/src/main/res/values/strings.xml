@@ -33,8 +33,8 @@
     <string name="noConfig">No configurations have been created.</string>
     <string name="speakerName">Speaker Name</string>
     <string name="speakerId">Speaker ID</string>
-    <string name="editSpeakerInfo">Edit Speaker Info</string>
-    <string name="moveSpeaker">Move Speaker</string>
+    <string name="editSpeakerInfo">Edit Info</string>
+    <string name="moveSpeaker">Move</string>
     <string name="tweeter">Tweeter</string>
     <string name="noSpeakerSelected">No speaker selected</string>
     <string name="_0_0">0.0</string>
@@ -45,4 +45,5 @@
     <string name="roomLengthDisplay">Room Length (ft): %1$d</string>
     <string name="roomWidthDisplay">Room Width (ft): %1$d</string>
     <string name="wallMaterialDisplay">Wall Material: %1$s</string>
+    <string name="resetPosition">Reset Position</string>
 </resources>

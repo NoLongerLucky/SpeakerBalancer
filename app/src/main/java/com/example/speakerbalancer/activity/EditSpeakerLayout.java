@@ -47,11 +47,7 @@ public class EditSpeakerLayout extends EditConfiguration {
 
                 if (!fromUser) return;
                 float bias = (float) progress / 100;
-                ConstraintSet set = new ConstraintSet();
-                set.clone(speakerBorder);
-                set.centerHorizontally(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
-                set.applyTo(speakerBorder);
-                tempConfig.xBiases[selectedSpeaker] = bias;
+                changeSpeakerXBias(bias);
             }
 
             @Override
@@ -74,11 +70,7 @@ public class EditSpeakerLayout extends EditConfiguration {
 
                 if (!fromUser) return;
                 float bias = (float) progress / 100;
-                ConstraintSet set = new ConstraintSet();
-                set.clone(speakerBorder);
-                set.centerVertically(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
-                set.applyTo(speakerBorder);
-                tempConfig.yBiases[selectedSpeaker] = bias;
+                changeSpeakerYBias(bias);
             }
 
             @Override
@@ -109,11 +101,36 @@ public class EditSpeakerLayout extends EditConfiguration {
             selectedSpeaker = position;
             seekBarX.setProgress((int) (tempConfig.xBiases[position] * 100));
             seekBarY.setProgress((int) (tempConfig.yBiases[position] * 100));
+        }, (channel, position) -> {
+            selectedSpeaker = position;
+            previousButton.setEnabled(true);
+
+            changeSpeakerXBias((float) channel.getxBias());
+            seekBarX.setProgress((int) tempConfig.xBiases[position] * 100);
+
+            changeSpeakerYBias((float) channel.getyBias());
+            seekBarY.setProgress((int) tempConfig.yBiases[position] * 100);
         }, (speaker) -> {
             this.selected.setText(getString(R.string.editingSpeaker, speaker.name, speaker.channel.id));
             previousButton.setEnabled(true);
         }));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         speakerList.setNestedScrollingEnabled(false);
+    }
+
+    private void changeSpeakerXBias(float bias) {
+        ConstraintSet set = new ConstraintSet();
+        set.clone(speakerBorder);
+        set.centerHorizontally(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
+        set.applyTo(speakerBorder);
+        tempConfig.xBiases[selectedSpeaker] = bias;
+    }
+
+    private void changeSpeakerYBias(float bias) {
+        ConstraintSet set = new ConstraintSet();
+        set.clone(speakerBorder);
+        set.centerVertically(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
+        set.applyTo(speakerBorder);
+        tempConfig.yBiases[selectedSpeaker] = bias;
     }
 }

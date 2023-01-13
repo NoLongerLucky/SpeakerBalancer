@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.speakerbalancer.speakers.Speaker;
+import com.example.speakerbalancer.systems.Channel;
 
 import java.util.List;
 
@@ -19,12 +20,14 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     Context context;
     List<Speaker> list;
     MoveItemClickListener moveItemClickListener;
+    ResetItemPosClickListener resetItemClickListener;
     EditItemClickListener editItemClickListener;
 
-    public SpeakerListAdapter(Context context, List<Speaker> list, MoveItemClickListener moveItemClickListener, EditItemClickListener editItemClickListener) {
+    public SpeakerListAdapter(Context context, List<Speaker> list, MoveItemClickListener moveItemClickListener, ResetItemPosClickListener resetItemClickListener, EditItemClickListener editItemClickListener) {
         this.context = context;
         this.list = list;
         this.moveItemClickListener = moveItemClickListener;
+        this.resetItemClickListener = resetItemClickListener;
         this.editItemClickListener = editItemClickListener;
     }
 
@@ -41,12 +44,16 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
         holder.speakerName.setText(list.get(position).name);
         holder.speakerId.setText(list.get(position).channel.id);
 
-        holder.moveSpeaker.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
+        holder.move.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
                 list.get(position),
-                holder.moveSpeaker,
+                holder.move,
                 position
         ));
-        holder.editSpeakerInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(
+        holder.resetPosition.setOnClickListener(view -> resetItemClickListener.onSpeakerResetPos(
+                list.get(position).channel,
+                position
+        ));
+        holder.editInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(
                 list.get(position)
         ));
     }
@@ -59,7 +66,7 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView speakerImage;
         TextView speakerName, speakerId;
-        Button moveSpeaker, editSpeakerInfo;
+        Button move, resetPosition, editInfo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,13 +74,18 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
             speakerImage = itemView.findViewById(R.id.speakerImage);
             speakerName = itemView.findViewById(R.id.speakerName);
             speakerId = itemView.findViewById(R.id.speakerId);
-            moveSpeaker = itemView.findViewById(R.id.moveSpeaker);
-            editSpeakerInfo = itemView.findViewById(R.id.editSpeakerInfo);
+            move = itemView.findViewById(R.id.move);
+            resetPosition = itemView.findViewById(R.id.resetPosition);
+            editInfo = itemView.findViewById(R.id.editInfo);
         }
     }
 
     public interface MoveItemClickListener {
         void onSpeakerMove(Speaker speaker, Button button, int position);
+    }
+
+    public interface ResetItemPosClickListener {
+        void onSpeakerResetPos(Channel channel, int position);
     }
 
     public interface EditItemClickListener {
