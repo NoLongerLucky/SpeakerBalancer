@@ -39,10 +39,10 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SpeakerListAdapter.ViewHolder holder, final int position) {
-        holder.speakerImage.setImageResource(list.get(position).imageId);
+        holder.speakerImage.setImageResource(list.get(position).getImageId());
 
-        holder.speakerName.setText(list.get(position).name);
-        holder.speakerId.setText(list.get(position).channel.id);
+        holder.speakerName.setText(list.get(position).getName());
+        holder.speakerId.setText(list.get(position).getChannel().getId());
 
         holder.move.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
                 list.get(position),
@@ -50,7 +50,7 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
                 position
         ));
         holder.resetPosition.setOnClickListener(view -> resetItemClickListener.onSpeakerResetPos(
-                list.get(position).channel,
+                list.get(position).getChannel(),
                 position
         ));
         holder.editInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(

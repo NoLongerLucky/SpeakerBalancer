@@ -2,13 +2,11 @@ package com.example.speakerbalancer.systems;
 
 import com.example.speakerbalancer.speakers.Speaker;
 
-import java.util.Arrays;
-
 public class SpeakerSystem {
-    public int amount;
-    public String name;
-    public Speaker[] speakers;
-    public LFE lfe;
+    private int amount;
+    public final String name;
+    protected Speaker[] speakers;
+    private LFE lfe;
 
     public SpeakerSystem(int amount, String name, boolean enableLFE, boolean checkLFE) {
         this.amount = amount;
@@ -21,10 +19,10 @@ public class SpeakerSystem {
         return amount + "." + (lfe.isChecked() ? 1 : 0);
     }
 
-    public int findIndex() {
+    public int directoryIndex() {
         SystemDirectory[] values = SystemDirectory.values();
         for (int i = 0; i < values.length; i++) {
-            if (values[i].speakerSystem.name.equals(this.name)) return i;
+            if (values[i].getSpeakerSystem().name.equals(this.name)) return i;
         }
         return 0;
     }
@@ -38,15 +36,17 @@ public class SpeakerSystem {
     }
 
     public Speaker[] getSpeakers() {
-        Speaker[] arr = speakers;
-        if (!lfe.isChecked()) arr = Arrays.copyOf(arr, arr.length - 1);
-        return arr;
+        return speakers;
+    }
+
+    public void setSpeakers(Speaker[] speakers) {
+        this.speakers = speakers;
     }
 
     public double[] getxBiases() {
         double[] arr = new double[speakers.length];
         for (int i = 0; i < speakers.length; i++) {
-            arr[i] = (int) speakers[i].channel.getxBias();
+            arr[i] = (int) speakers[i].getChannel().getxBias();
         }
         return arr;
     }
@@ -54,8 +54,12 @@ public class SpeakerSystem {
     public double[] getyBiases() {
         double[] arr = new double[speakers.length];
         for (int i = 0; i < speakers.length; i++) {
-            arr[i] = (int) speakers[i].channel.getyBias();
+            arr[i] = (int) speakers[i].getChannel().getyBias();
         }
         return arr;
+    }
+
+    public LFE getLfe() {
+        return lfe;
     }
 }

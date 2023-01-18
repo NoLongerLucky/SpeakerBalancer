@@ -13,8 +13,8 @@ public enum Channel {
     SPEAKER_SIDE_LEFT("SL", 9, 0, 0.5),
     SPEAKER_SIDE_RIGHT("SR", 10, 1, 0.5);
 
-    public final String id;
-    public final int index;
+    private final String id;
+    private final int index;
     private final double xBias, yBias;
 
     Channel(String id, int index, double xBias, double yBias) {
@@ -22,6 +22,14 @@ public enum Channel {
         this.index = index;
         this.xBias = xBias;
         this.yBias = yBias;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public double getxBias() {

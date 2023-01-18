@@ -9,9 +9,13 @@ public enum SystemDirectory {
     SURROUND(new Surround()),
     QUAD(new Quad());
 
-    public final SpeakerSystem speakerSystem;
+    private final SpeakerSystem speakerSystem;
 
     SystemDirectory(SpeakerSystem speakerSystem) {
         this.speakerSystem = speakerSystem;
+    }
+
+    public SpeakerSystem getSpeakerSystem() {
+        return speakerSystem;
     }
 }

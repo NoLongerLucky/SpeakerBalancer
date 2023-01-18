@@ -55,7 +55,7 @@ public class NewConfiguration extends AppCompatActivity {
         systemTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                LFE lfe = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem.lfe;
+                LFE lfe = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).getSpeakerSystem().getLfe();
                 updateCheckbox(lfe);
             }
 
@@ -103,7 +103,7 @@ public class NewConfiguration extends AppCompatActivity {
     }
 
     protected void confirmSuccess() {
-        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
+        SpeakerSystem systemTypeData = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).getSpeakerSystem();
         saveToDatabase(systemTypeData, -1);
 
         Intent i = new Intent(NewConfiguration.this, EditConfiguration.class);
@@ -122,7 +122,7 @@ public class NewConfiguration extends AppCompatActivity {
         if (id >= 0) storedConfig.setId(id);
         storedConfig.setName(nameData);
         storedConfig.setSystemType(systemTypeData);
-        storedConfig.getSystemType().lfe.setChecked(lfeCheckbox.isChecked());
+        storedConfig.getSystemType().getLfe().setChecked(lfeCheckbox.isChecked());
         storedConfig.setRoomLength(roomLengthData);
         storedConfig.setRoomWidth(roomWidthData);
         storedConfig.setWallMaterial(wallMaterialData);

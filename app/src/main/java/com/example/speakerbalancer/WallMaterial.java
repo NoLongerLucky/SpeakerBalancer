@@ -8,7 +8,7 @@ public enum WallMaterial {
     GLASS("#A8CCD7"),
     ACOUSTIC_PANELING("#5462C5");
 
-    public final int color;
+    private final int color;
 
     WallMaterial(String color) {
         this.color = Color.parseColor(String.valueOf(color));
@@ -20,5 +20,9 @@ public enum WallMaterial {
         str = "";
         for (String s : split) str = str.concat(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ");
         return str.trim();
+    }
+
+    public int getColor() {
+        return color;
     }
 }

@@ -3,10 +3,10 @@ package com.example.speakerbalancer.speakers;
 import com.example.speakerbalancer.systems.Channel;
 
 public class Speaker {
-    public String name;
-    protected int minRange, maxRange;
-    public final Channel channel;
-    public final int imageId;
+    private String name;
+    private int minRange, maxRange;
+    private final Channel channel;
+    private final int imageId;
 
     Speaker(String name, int minRange, int maxRange, Channel channel, int imageId) {
         this.name = name;
@@ -14,5 +14,25 @@ public class Speaker {
         this.maxRange = maxRange;
         this.channel = channel;
         this.imageId = imageId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMinRange() {
+        return minRange;
+    }
+
+    public int getMaxRange() {
+        return maxRange;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public int getImageId() {
+        return imageId;
     }
 }

@@ -25,15 +25,15 @@ public class EditConfigurationInfo extends NewConfiguration {
         config = AppDatabase.getDatabase(getApplicationContext()).getDao().getData(id);
 
         if (nameInput != null) nameInput.setText(config.getName());
-        systemTypeSpinner.setSelection(config.getSystemType().findIndex());
-        updateCheckbox(config.getSystemType().lfe);
+        systemTypeSpinner.setSelection(config.getSystemType().directoryIndex());
+        updateCheckbox(config.getSystemType().getLfe());
         if (roomLengthInput != null) roomLengthInput.setText(String.valueOf(config.getRoomLength()));
         if (roomWidthInput != null) roomWidthInput.setText(String.valueOf(config.getRoomWidth()));
         wallMaterialSpinner.setSelection(Arrays.asList(WallMaterial.values()).indexOf(config.getWallMaterial()));
     }
 
     protected void confirmSuccess() {
-        SpeakerSystem defaultSystemType = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).speakerSystem;
+        SpeakerSystem defaultSystemType = ((SystemDirectory) systemTypeSpinner.getSelectedItem()).getSpeakerSystem();
         SpeakerSystem currentSystemType = config.getSystemType();
         if (!currentSystemType.name.equals(defaultSystemType.name)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditConfigurationInfo.this);

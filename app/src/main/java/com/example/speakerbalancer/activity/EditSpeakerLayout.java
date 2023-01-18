@@ -94,7 +94,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     private void createSpeakerList() {
         List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
         speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (speaker, button, position) -> {
-            this.selected.setText(getString(R.string.movingSpeaker, speaker.name, speaker.channel.id));
+            this.selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
             (previousButton == null ? button : previousButton).setEnabled(true);
             button.setEnabled(false);
             previousButton = button;
@@ -111,7 +111,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             changeSpeakerYBias((float) channel.getyBias());
             seekBarY.setProgress((int) tempConfig.yBiases[position] * 100);
         }, (speaker) -> {
-            this.selected.setText(getString(R.string.editingSpeaker, speaker.name, speaker.channel.id));
+            this.selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
             previousButton.setEnabled(true);
         }));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

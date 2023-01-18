@@ -10,22 +10,22 @@ import com.example.speakerbalancer.systems.SpeakerSystem;
 @Entity(tableName = "config_table")
 public class StoredConfig {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
     @ColumnInfo(name = "name")
-    public String name;
+    private String name;
 
     @ColumnInfo(name = "system_type")
-    public SpeakerSystem systemType;
+    private SpeakerSystem systemType;
 
     @ColumnInfo(name = "room_length")
-    public int roomLength;
+    private int roomLength;
 
     @ColumnInfo(name = "room_width")
-    public int roomWidth;
+    private int roomWidth;
 
     @ColumnInfo(name = "wall_material")
-    public WallMaterial wallMaterial;
+    private WallMaterial wallMaterial;
 
     public int getId() {
         return id;

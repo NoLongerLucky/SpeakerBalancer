@@ -93,10 +93,10 @@ public class EditConfiguration extends AppCompatActivity {
         boxLengthDisplay.setText(lengthDisplay);
         boxWidthDisplay.setText(widthDisplay);
 
-        leftWall.setBackgroundColor(config.getWallMaterial().color);
-        rightWall.setBackgroundColor(config.getWallMaterial().color);
-        topWall.setBackgroundColor(config.getWallMaterial().color);
-        bottomWall.setBackgroundColor(config.getWallMaterial().color);
+        leftWall.setBackgroundColor(config.getWallMaterial().getColor());
+        rightWall.setBackgroundColor(config.getWallMaterial().getColor());
+        topWall.setBackgroundColor(config.getWallMaterial().getColor());
+        bottomWall.setBackgroundColor(config.getWallMaterial().getColor());
 
         // Bad code, just a proof of concept
         // TO-DO:
@@ -113,9 +113,11 @@ public class EditConfiguration extends AppCompatActivity {
         //  X Fix bug where they reset position when selected again
         //  X Fix bug where position display doesn't always update correctly
         //  X Add button to reset position(s)
-        // - Finalize as many StoredConfig attributes as possible
+        // X Finalize as many StoredConfig attributes as possible
         // - Combine click listeners for adapters
         // - Save speaker positions to database
+        // - Experiment with what happens when LFE is enabled/disabled
+        // - Changing speaker system resets current/stored positions
         // X Display list of speakers on EditSpeakerLayout activity in a table
         // X Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
@@ -123,10 +125,8 @@ public class EditConfiguration extends AppCompatActivity {
         // - Selected speaker slightly changes color
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
-        if (!config.getSystemType().lfe.isChecked()) {
-            speakerBorder.removeView(findViewById(101 + config.getSystemType().amount));
-            speakerBorder.removeView(findViewById(201 + config.getSystemType().amount));
-        }
+        speakerBorder.removeView(findViewById(101 + config.getSystemType().getAmount()));
+        speakerBorder.removeView(findViewById(201 + config.getSystemType().getAmount()));
     }
 
     protected void createSpeakerBox(int index) {
@@ -138,14 +138,14 @@ public class EditConfiguration extends AppCompatActivity {
 
         TextView text = new TextView(this);
         text.setId(201 + index);
-        text.setText(config.getSystemType().speakers[index].channel.id);
+        text.setText(config.getSystemType().getSpeakers()[index].getChannel().getId());
         text.setTextColor(Color.parseColor("#FFFFFF"));
         speakerBorder.addView(text, index);
 
         ConstraintSet set = new ConstraintSet();
         set.clone(speakerBorder);
-        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, (float) config.getSystemType().speakers[index].channel.getxBias());
-        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, (float) config.getSystemType().speakers[index].channel.getyBias());
+        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, (float) config.getSystemType().getSpeakers()[index].getChannel().getxBias());
+        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, (float) config.getSystemType().getSpeakers()[index].getChannel().getyBias());
         set.centerHorizontally(text.getId(), box.getId(), ConstraintSet.LEFT, 0, box.getId(), ConstraintSet.RIGHT, 0, 0.5F);
         set.centerVertically(text.getId(), box.getId(), ConstraintSet.TOP, 0, box.getId(), ConstraintSet.BOTTOM, 0, 0.5F);
         set.applyTo(speakerBorder);
