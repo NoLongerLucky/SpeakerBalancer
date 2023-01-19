@@ -17,4 +17,8 @@ public class TempConfig {
         config.getSystemType().setYBiases(yBiases);
         return config;
     }
+
+    public int amount() {
+        return Math.min(xBiases.length, yBiases.length);
+    }
 }

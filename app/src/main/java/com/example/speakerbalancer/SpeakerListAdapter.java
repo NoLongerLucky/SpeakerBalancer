@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.speakerbalancer.speakers.Speaker;
-import com.example.speakerbalancer.systems.Channel;
 
 import java.util.List;
 
@@ -50,7 +49,6 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
                 position
         ));
         holder.resetPosition.setOnClickListener(view -> resetItemClickListener.onSpeakerResetPos(
-                list.get(position).getChannel(),
                 position
         ));
         holder.editInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(
@@ -85,7 +83,7 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     }
 
     public interface ResetItemPosClickListener {
-        void onSpeakerResetPos(Channel channel, int position);
+        void onSpeakerResetPos(int position);
     }
 
     public interface EditItemClickListener {

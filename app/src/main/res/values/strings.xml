@@ -46,4 +46,5 @@
     <string name="roomWidthDisplay">Room Width (ft): %1$d</string>
     <string name="wallMaterialDisplay">Wall Material: %1$s</string>
     <string name="resetPosition">Reset Position</string>
+    <string name="resetAllSpeakerPositions">Reset All Speaker Positions</string>
 </resources>

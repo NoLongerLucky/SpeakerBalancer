@@ -15,7 +15,6 @@ import com.example.speakerbalancer.SpeakerListAdapter;
 import com.example.speakerbalancer.data.AppDatabase;
 import com.example.speakerbalancer.data.TempConfig;
 import com.example.speakerbalancer.speakers.Speaker;
-import com.example.speakerbalancer.systems.Channel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     SeekBar seekBarX, seekBarY;
     TextView selected, positionX, positionY;
     RecyclerView speakerList;
-    Button saveLayout, previousButton;
+    Button saveLayout, resetAllSpeakerPositions, previousButton;
     int speaker = -1;
 
     @Override
@@ -42,6 +41,8 @@ public class EditSpeakerLayout extends EditConfiguration {
         speakerList = findViewById(R.id.speakerList);
         saveLayout = findViewById(R.id.saveLayout);
         saveLayout.setOnClickListener(view -> saveLayout());
+        resetAllSpeakerPositions = findViewById(R.id.resetAllSpeakerPositions);
+        resetAllSpeakerPositions.setOnClickListener(view -> resetAllSpeakerPositions());
 
         seekBarX.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -104,10 +105,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             this.speaker = position;
             seekBarX.setProgress((int) (unsavedConfig.xBiases[position] * 100));
             seekBarY.setProgress((int) (unsavedConfig.yBiases[position] * 100));
-        }, (channel, position) -> {
-            changeSpeakerXBias(position, Channel.values()[channel.getIndex()].getDefaultXBias());
-            changeSpeakerYBias(position, Channel.values()[channel.getIndex()].getDefaultYBias());
-        }, (speaker) -> {
+        }, this::resetSpeakerPosition, (speaker) -> {
             selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
             if (previousButton != null) previousButton.setEnabled(true);
         }));
@@ -129,6 +127,15 @@ public class EditSpeakerLayout extends EditConfiguration {
         set.centerVertically(speaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
         set.applyTo(speakerBorder);
         unsavedConfig.yBiases[speaker] = bias;
+    }
+
+    private void resetSpeakerPosition(int speaker) {
+        changeSpeakerXBias(speaker, config.getSystemType().getSpeakers()[speaker].getChannel().getDefaultXBias());
+        changeSpeakerYBias(speaker, config.getSystemType().getSpeakers()[speaker].getChannel().getDefaultYBias());
+    }
+
+    private void resetAllSpeakerPositions() {
+        for (int i = 0; i < unsavedConfig.amount(); i++) resetSpeakerPosition(i);
     }
 
     private void saveLayout() {
