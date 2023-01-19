@@ -15,13 +15,13 @@ public enum Channel {
 
     private final String id;
     private final int index;
-    private float xBias, yBias;
+    private final float defaultXBias, defaultYBias;
 
-    Channel(String id, int index, float xBias, float yBias) {
+    Channel(String id, int index, float defaultXBias, float defaultYBias) {
         this.id = id;
         this.index = index;
-        this.xBias = xBias;
-        this.yBias = yBias;
+        this.defaultXBias = defaultXBias;
+        this.defaultYBias = defaultYBias;
     }
 
     public String getId() {
@@ -32,20 +32,12 @@ public enum Channel {
         return index;
     }
 
-    public float getxBias() {
-        return xBias;
+    public float getDefaultXBias() {
+        return defaultXBias;
     }
 
-    public void setxBias(float xBias) {
-        this.xBias = xBias;
-    }
-
-    public float getyBias() {
-        return yBias;
-    }
-
-    public void setyBias(float yBias) {
-        this.yBias = yBias;
+    public float getDefaultYBias() {
+        return defaultYBias;
     }
 }
 

@@ -6,6 +6,7 @@ public class Speaker {
     private String name;
     private int minRange, maxRange;
     private final Channel channel;
+    private float xBias, yBias;
     private final int imageId;
 
     Speaker(String name, int minRange, int maxRange, Channel channel, int imageId) {
@@ -13,6 +14,8 @@ public class Speaker {
         this.minRange = minRange;
         this.maxRange = maxRange;
         this.channel = channel;
+        this.xBias = channel.getDefaultXBias();
+        this.yBias = channel.getDefaultYBias();
         this.imageId = imageId;
     }
 
@@ -30,6 +33,22 @@ public class Speaker {
 
     public Channel getChannel() {
         return channel;
+    }
+
+    public float getXBias() {
+        return xBias;
+    }
+
+    public void setXBias(float xBias) {
+        this.xBias = xBias;
+    }
+
+    public float getYBias() {
+        return yBias;
+    }
+
+    public void setYBias(float yBias) {
+        this.yBias = yBias;
     }
 
     public int getImageId() {

@@ -26,7 +26,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     TextView selected, positionX, positionY;
     RecyclerView speakerList;
     Button saveLayout, previousButton;
-    int selectedSpeaker = -1;
+    int speaker = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,8 @@ public class EditSpeakerLayout extends EditConfiguration {
                 double text = (double)num / 100;
                 positionX.setText(String.valueOf(text));
 
-                if (!fromUser) return;
-                float bias = (float) progress / 100;
-                changeSpeakerXBias(bias);
+                if (!fromUser || speaker < 0) return;
+                changeSpeakerXBias(speaker, (float) progress / 100);
             }
 
             @Override
@@ -73,9 +72,8 @@ public class EditSpeakerLayout extends EditConfiguration {
                 double text = (double)num / 100;
                 positionY.setText(String.valueOf(text));
 
-                if (!fromUser) return;
-                float bias = (float) progress / 100;
-                changeSpeakerYBias(bias);
+                if (!fromUser || speaker < 0) return;
+                changeSpeakerYBias(speaker, (float) progress / 100);
             }
 
             @Override
@@ -99,47 +97,43 @@ public class EditSpeakerLayout extends EditConfiguration {
     private void createSpeakerList() {
         List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
         speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (speaker, button, position) -> {
-            this.selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
+            selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
             (previousButton == null ? button : previousButton).setEnabled(true);
             button.setEnabled(false);
             previousButton = button;
-            selectedSpeaker = position;
+            this.speaker = position;
             seekBarX.setProgress((int) (unsavedConfig.xBiases[position] * 100));
             seekBarY.setProgress((int) (unsavedConfig.yBiases[position] * 100));
         }, (channel, position) -> {
-            selectedSpeaker = position;
-            changeSpeakerXBias(Channel.values()[channel.getIndex()].getxBias());
-            changeSpeakerYBias(Channel.values()[channel.getIndex()].getyBias());
+            changeSpeakerXBias(position, Channel.values()[channel.getIndex()].getDefaultXBias());
+            changeSpeakerYBias(position, Channel.values()[channel.getIndex()].getDefaultYBias());
         }, (speaker) -> {
-            this.selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
+            selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
             previousButton.setEnabled(true);
         }));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         speakerList.setNestedScrollingEnabled(false);
     }
 
-    private void changeSpeakerXBias(float bias) {
-        if (selectedSpeaker < 0) return;
+    private void changeSpeakerXBias(int speaker, float bias) {
         ConstraintSet set = new ConstraintSet();
         set.clone(speakerBorder);
-        set.centerHorizontally(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
+        set.centerHorizontally(speaker + 101, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
         set.applyTo(speakerBorder);
-        unsavedConfig.xBiases[selectedSpeaker] = bias;
+        unsavedConfig.xBiases[speaker] = bias;
     }
 
-    private void changeSpeakerYBias(float bias) {
-        if (selectedSpeaker < 0) return;
+    private void changeSpeakerYBias(int speaker, float bias) {
         ConstraintSet set = new ConstraintSet();
         set.clone(speakerBorder);
-        set.centerVertically(selectedSpeaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
+        set.centerVertically(speaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
         set.applyTo(speakerBorder);
-        unsavedConfig.yBiases[selectedSpeaker] = bias;
+        unsavedConfig.yBiases[speaker] = bias;
     }
 
     private void saveLayout() {
-        // DOES NOT WORK
-        config.getSystemType().setxBiases(unsavedConfig.xBiases);
-        config.getSystemType().setyBiases(unsavedConfig.yBiases);
+        config.getSystemType().setXBiases(unsavedConfig.xBiases);
+        config.getSystemType().setYBiases(unsavedConfig.yBiases);
         AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(config);
         Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
         finish();

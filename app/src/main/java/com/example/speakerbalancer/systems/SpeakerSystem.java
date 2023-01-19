@@ -43,28 +43,24 @@ public class SpeakerSystem {
         this.speakers = speakers;
     }
 
-    public float[] getxBiases() {
+    public float[] getXBiases() {
         float[] arr = new float[speakers.length];
-        for (int i = 0; i < speakers.length; i++) {
-            arr[i] = speakers[i].getChannel().getxBias();
-        }
+        for (int i = 0; i < speakers.length; i++) arr[i] = speakers[i].getXBias();
         return arr;
     }
 
-    public void setxBiases(float[] xBiases) {
-        for (int i = 0; i < speakers.length; i++) speakers[i].getChannel().setxBias(xBiases[i]);
+    public void setXBiases(float[] xBiases) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].setXBias(xBiases[i]);
     }
 
-    public float[] getyBiases() {
+    public float[] getYBiases() {
         float[] arr = new float[speakers.length];
-        for (int i = 0; i < speakers.length; i++) {
-            arr[i] = speakers[i].getChannel().getyBias();
-        }
+        for (int i = 0; i < speakers.length; i++) arr[i] = speakers[i].getYBias();
         return arr;
     }
 
-    public void setyBiases(float[] yBiases) {
-        for (int i = 0; i < speakers.length; i++) speakers[i].getChannel().setyBias(yBiases[i]);
+    public void setYBiases(float[] yBiases) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].setYBias(yBiases[i]);
     }
 
     public LFE getLfe() {

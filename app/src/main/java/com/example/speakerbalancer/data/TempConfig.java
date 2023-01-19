@@ -8,7 +8,7 @@ public class TempConfig {
     public TempConfig(Context context, int id) {
         StoredConfig storedConfig = AppDatabase.getDatabase(context).getDao().getData(id);
 
-        this.xBiases = storedConfig.getSystemType().getxBiases();
-        this.yBiases = storedConfig.getSystemType().getyBiases();
+        this.xBiases = storedConfig.getSystemType().getXBiases();
+        this.yBiases = storedConfig.getSystemType().getYBiases();
     }
 }
