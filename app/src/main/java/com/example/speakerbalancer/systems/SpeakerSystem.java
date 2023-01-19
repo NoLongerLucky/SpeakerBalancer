@@ -3,10 +3,10 @@ package com.example.speakerbalancer.systems;
 import com.example.speakerbalancer.speakers.Speaker;
 
 public class SpeakerSystem {
-    private int amount;
+    private final int amount;
     public final String name;
     protected Speaker[] speakers;
-    private LFE lfe;
+    private final LFE lfe;
 
     public SpeakerSystem(int amount, String name, boolean enableLFE, boolean checkLFE) {
         this.amount = amount;
@@ -43,20 +43,28 @@ public class SpeakerSystem {
         this.speakers = speakers;
     }
 
-    public double[] getxBiases() {
-        double[] arr = new double[speakers.length];
+    public float[] getxBiases() {
+        float[] arr = new float[speakers.length];
         for (int i = 0; i < speakers.length; i++) {
-            arr[i] = (int) speakers[i].getChannel().getxBias();
+            arr[i] = speakers[i].getChannel().getxBias();
         }
         return arr;
     }
 
-    public double[] getyBiases() {
-        double[] arr = new double[speakers.length];
+    public void setxBiases(float[] xBiases) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].getChannel().setxBias(xBiases[i]);
+    }
+
+    public float[] getyBiases() {
+        float[] arr = new float[speakers.length];
         for (int i = 0; i < speakers.length; i++) {
-            arr[i] = (int) speakers[i].getChannel().getyBias();
+            arr[i] = speakers[i].getChannel().getyBias();
         }
         return arr;
+    }
+
+    public void setyBiases(float[] yBiases) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].getChannel().setyBias(yBiases[i]);
     }
 
     public LFE getLfe() {

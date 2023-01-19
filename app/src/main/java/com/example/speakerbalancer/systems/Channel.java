@@ -1,23 +1,23 @@
 package com.example.speakerbalancer.systems;
 
 public enum Channel {
-    SPEAKER_FRONT_LEFT("FL", 0, 0, 0),
-    SPEAKER_FRONT_RIGHT("FR", 1, 1, 0),
-    SPEAKER_FRONT_CENTER("FC", 2, 0.5, 0),
-    SPEAKER_LOW_FREQUENCY("LFE", 3, 0.5, 0.5),
-    SPEAKER_BACK_LEFT("BL", 4, 0, 1),
-    SPEAKER_BACK_RIGHT("BR", 5, 1, 1),
-    SPEAKER_FRONT_LEFT_OF_CENTER("FLC", 6, 0.25, 0),
-    SPEAKER_FRONT_RIGHT_OF_CENTER("FRC", 7, 0.75, 0),
-    SPEAKER_BACK_CENTER("BC", 8, 0.5, 1),
-    SPEAKER_SIDE_LEFT("SL", 9, 0, 0.5),
-    SPEAKER_SIDE_RIGHT("SR", 10, 1, 0.5);
+    SPEAKER_FRONT_LEFT("FL", 0, 0F, 0F),
+    SPEAKER_FRONT_RIGHT("FR", 1, 1F, 0F),
+    SPEAKER_FRONT_CENTER("FC", 2, 0.5F, 0F),
+    SPEAKER_LOW_FREQUENCY("LFE", 3, 0.5F, 0.5F),
+    SPEAKER_BACK_LEFT("BL", 4, 0F, 1F),
+    SPEAKER_BACK_RIGHT("BR", 5, 1F, 1F),
+    SPEAKER_FRONT_LEFT_OF_CENTER("FLC", 6, 0.25F, 0F),
+    SPEAKER_FRONT_RIGHT_OF_CENTER("FRC", 7, 0.75F, 0F),
+    SPEAKER_BACK_CENTER("BC", 8, 0.5F, 1F),
+    SPEAKER_SIDE_LEFT("SL", 9, 0F, 0.5F),
+    SPEAKER_SIDE_RIGHT("SR", 10, 1F, 0.5F);
 
     private final String id;
     private final int index;
-    private final double xBias, yBias;
+    private float xBias, yBias;
 
-    Channel(String id, int index, double xBias, double yBias) {
+    Channel(String id, int index, float xBias, float yBias) {
         this.id = id;
         this.index = index;
         this.xBias = xBias;
@@ -32,12 +32,20 @@ public enum Channel {
         return index;
     }
 
-    public double getxBias() {
+    public float getxBias() {
         return xBias;
     }
 
-    public double getyBias() {
+    public void setxBias(float xBias) {
+        this.xBias = xBias;
+    }
+
+    public float getyBias() {
         return yBias;
+    }
+
+    public void setyBias(float yBias) {
+        this.yBias = yBias;
     }
 }
 

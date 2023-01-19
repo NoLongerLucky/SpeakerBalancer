@@ -114,8 +114,9 @@ public class EditConfiguration extends AppCompatActivity {
         //  X Fix bug where position display doesn't always update correctly
         //  X Add button to reset position(s)
         // X Finalize as many StoredConfig attributes as possible
-        // - Combine click listeners for adapters
         // - Save speaker positions to database
+        // - Fix LFE showing in speaker list even when removed
+        // - Button to reset all speaker positions
         // - Experiment with what happens when LFE is enabled/disabled
         // - Changing speaker system resets current/stored positions
         // X Display list of speakers on EditSpeakerLayout activity in a table
@@ -144,8 +145,8 @@ public class EditConfiguration extends AppCompatActivity {
 
         ConstraintSet set = new ConstraintSet();
         set.clone(speakerBorder);
-        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, (float) config.getSystemType().getSpeakers()[index].getChannel().getxBias());
-        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, (float) config.getSystemType().getSpeakers()[index].getChannel().getyBias());
+        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, config.getSystemType().getSpeakers()[index].getChannel().getxBias());
+        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, config.getSystemType().getSpeakers()[index].getChannel().getyBias());
         set.centerHorizontally(text.getId(), box.getId(), ConstraintSet.LEFT, 0, box.getId(), ConstraintSet.RIGHT, 0, 0.5F);
         set.centerVertically(text.getId(), box.getId(), ConstraintSet.TOP, 0, box.getId(), ConstraintSet.BOTTOM, 0, 0.5F);
         set.applyTo(speakerBorder);
