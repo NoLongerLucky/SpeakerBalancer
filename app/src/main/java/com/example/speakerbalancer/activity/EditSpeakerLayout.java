@@ -109,7 +109,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             changeSpeakerYBias(position, Channel.values()[channel.getIndex()].getDefaultYBias());
         }, (speaker) -> {
             selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
-            previousButton.setEnabled(true);
+            if (previousButton != null) previousButton.setEnabled(true);
         }));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         speakerList.setNestedScrollingEnabled(false);
