@@ -103,7 +103,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             seekBarY.setProgress((int) (tempConfig.yBiases[position] * 100));
         }, (channel, position) -> {
             selectedSpeaker = position;
-            previousButton.setEnabled(true);
+            if (previousButton != null) previousButton.setEnabled(true);
 
             changeSpeakerXBias((float) channel.getxBias());
             seekBarX.setProgress((int) tempConfig.xBiases[position] * 100);
