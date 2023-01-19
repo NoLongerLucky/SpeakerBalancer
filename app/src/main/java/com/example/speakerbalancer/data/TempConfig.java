@@ -11,4 +11,10 @@ public class TempConfig {
         this.xBiases = storedConfig.getSystemType().getXBiases();
         this.yBiases = storedConfig.getSystemType().getYBiases();
     }
+
+    public StoredConfig convertToStoredConfig(StoredConfig config) {
+        config.getSystemType().setXBiases(xBiases);
+        config.getSystemType().setYBiases(yBiases);
+        return config;
+    }
 }

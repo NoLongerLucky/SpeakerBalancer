@@ -132,8 +132,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     }
 
     private void saveLayout() {
-        config.getSystemType().setXBiases(unsavedConfig.xBiases);
-        config.getSystemType().setYBiases(unsavedConfig.yBiases);
+        config = unsavedConfig.convertToStoredConfig(config);
         AppDatabase.getDatabase(getApplicationContext()).getDao().insertAllData(config);
         Toast.makeText(this, getString(R.string.dataSaved), Toast.LENGTH_SHORT).show();
         finish();
