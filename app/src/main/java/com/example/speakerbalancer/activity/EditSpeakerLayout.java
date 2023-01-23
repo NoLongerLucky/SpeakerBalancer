@@ -18,6 +18,7 @@ import com.example.speakerbalancer.speakers.Speaker;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class EditSpeakerLayout extends EditConfiguration {
     TempConfig unsavedConfig;
@@ -95,17 +96,27 @@ public class EditSpeakerLayout extends EditConfiguration {
         setContentView(R.layout.activity_edit_speaker_layout);
     }
 
+    protected void boxClickListener(int id) {
+        id -= 101;
+        Speaker speaker = config.getSystemType().getSpeakers()[id];
+        Button button = Objects.requireNonNull(speakerList.findViewHolderForAdapterPosition(id)).itemView.findViewById(R.id.move);
+        int position = id;
+        selectSpeaker(speaker, button, position);
+    }
+
+    private void selectSpeaker(Speaker speaker, Button button, int position) {
+        selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
+        (previousButton == null ? button : previousButton).setEnabled(true);
+        button.setEnabled(false);
+        previousButton = button;
+        this.speaker = position;
+        seekBarX.setProgress((int) (unsavedConfig.xBiases[position] * 100));
+        seekBarY.setProgress((int) (unsavedConfig.yBiases[position] * 100));
+    }
+
     private void createSpeakerList() {
         List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
-        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, (speaker, button, position) -> {
-            selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
-            (previousButton == null ? button : previousButton).setEnabled(true);
-            button.setEnabled(false);
-            previousButton = button;
-            this.speaker = position;
-            seekBarX.setProgress((int) (unsavedConfig.xBiases[position] * 100));
-            seekBarY.setProgress((int) (unsavedConfig.yBiases[position] * 100));
-        }, this::resetSpeakerPosition, (speaker) -> {
+        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, this::selectSpeaker, this::resetSpeakerPosition, (speaker) -> {
             selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
             if (previousButton != null) previousButton.setEnabled(true);
         }));

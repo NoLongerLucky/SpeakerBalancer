@@ -119,7 +119,7 @@ public class EditConfiguration extends AppCompatActivity {
         // X Display list of speakers on EditSpeakerLayout activity in a table
         // X Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
-        // - Can click speaker to select (use OnClick event?)
+        // X Can click speaker to select (use OnClick event?)
         // - Selected speaker slightly changes color
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
@@ -132,6 +132,7 @@ public class EditConfiguration extends AppCompatActivity {
         box.setId(101 + index);
         box.setBackgroundColor(Color.parseColor("#000000"));
         box.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
+        box.setOnClickListener(v -> boxClickListener(box.getId()));
         speakerBorder.addView(box, index);
 
         TextView text = new TextView(this);
@@ -151,6 +152,8 @@ public class EditConfiguration extends AppCompatActivity {
         speakerBorder.bringToFront();
         findViewById(201 + index).bringToFront();
     }
+
+    protected void boxClickListener(int id) { }
 
     public void launch_editConfigInfo(View v) {
         Intent i = new Intent(this, EditConfigurationInfo.class);
