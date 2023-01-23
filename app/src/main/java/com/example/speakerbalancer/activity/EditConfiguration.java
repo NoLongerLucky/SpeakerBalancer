@@ -120,7 +120,9 @@ public class EditConfiguration extends AppCompatActivity {
         // X Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
         // X Can click speaker to select (use OnClick event?)
-        // - Selected speaker slightly changes color
+        // X Selected speaker slightly changes color
+        // - Reset all speaker positions confirmation
+        // - Resetting speaker position should reset X/Y slider
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
         speakerBorder.removeView(findViewById(101 + config.getSystemType().getAmount()));

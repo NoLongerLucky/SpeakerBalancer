@@ -1,5 +1,6 @@
 package com.example.speakerbalancer.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -106,12 +107,18 @@ public class EditSpeakerLayout extends EditConfiguration {
 
     private void selectSpeaker(Speaker speaker, Button button, int position) {
         selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
+        if (this.speaker >= 0) {
+            findViewById(this.speaker + 101).setBackgroundColor(Color.parseColor("#000000"));
+            ((TextView) findViewById(this.speaker + 201)).setTextColor(Color.parseColor("#FFFFFF"));
+        }
         (previousButton == null ? button : previousButton).setEnabled(true);
         button.setEnabled(false);
         previousButton = button;
         this.speaker = position;
         seekBarX.setProgress((int) (unsavedConfig.xBiases[position] * 100));
         seekBarY.setProgress((int) (unsavedConfig.yBiases[position] * 100));
+        findViewById(this.speaker + 101).setBackgroundColor(Color.parseColor("#FFFFFF"));
+        ((TextView) findViewById(this.speaker + 201)).setTextColor(Color.parseColor("#000000"));
     }
 
     private void createSpeakerList() {
