@@ -2,6 +2,8 @@ package com.example.speakerbalancer.systems;
 
 import com.example.speakerbalancer.speakers.Speaker;
 
+import java.util.Arrays;
+
 public class SpeakerSystem {
     private final int amount;
     public final String name;
@@ -36,7 +38,7 @@ public class SpeakerSystem {
     }
 
     public Speaker[] getSpeakers() {
-        return speakers;
+        return Arrays.copyOf(speakers, getAmount());
     }
 
     public void setSpeakers(Speaker[] speakers) {
