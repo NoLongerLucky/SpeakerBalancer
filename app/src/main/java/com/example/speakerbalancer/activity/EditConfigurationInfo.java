@@ -40,10 +40,7 @@ public class EditConfigurationInfo extends NewConfiguration {
             alertDialogBuilder.setTitle(getString(R.string.changedSystem));
             alertDialogBuilder.setMessage(getString(R.string.changedSystemBody));
             alertDialogBuilder.setPositiveButton(getString(R.string.confirm),
-                    (dialog, which) -> {
-                        // Resetting speaker positions will go here
-                        saveToDatabase(defaultSystemType, id);
-                    });
+                    (dialog, which) -> saveToDatabase(defaultSystemType, id));
             alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();

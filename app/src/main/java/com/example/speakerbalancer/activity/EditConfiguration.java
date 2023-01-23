@@ -116,9 +116,6 @@ public class EditConfiguration extends AppCompatActivity {
         // X Finalize as many StoredConfig attributes as possible
         // X Save speaker positions to database
         // X Fix LFE showing in speaker list even when removed
-        // - Button to reset all speaker positions
-        // - Experiment with what happens when LFE is enabled/disabled
-        // - Changing speaker system resets current/stored positions
         // X Display list of speakers on EditSpeakerLayout activity in a table
         // X Above list has a button for each entry, selecting it allows speaker to be moved
         // - Above list also allows editing each speaker's individual traits
