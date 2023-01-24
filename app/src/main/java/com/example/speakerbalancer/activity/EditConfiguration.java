@@ -125,8 +125,6 @@ public class EditConfiguration extends AppCompatActivity {
         // - Resetting speaker position should reset X/Y slider
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
-        speakerBorder.removeView(findViewById(101 + config.getSystemType().getAmount()));
-        speakerBorder.removeView(findViewById(201 + config.getSystemType().getAmount()));
     }
 
     protected void createSpeakerBox(int index) {
