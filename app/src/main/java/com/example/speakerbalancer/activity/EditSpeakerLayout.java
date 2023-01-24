@@ -153,7 +153,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     }
 
     private void resetAllSpeakerPositions() {
-        for (int i = 0; i < unsavedConfig.amount(); i++) resetSpeakerPosition(i);
+        for (int i = 0; i < config.getSystemType().getAmount(); i++) resetSpeakerPosition(i);
     }
 
     private void saveLayout() {
