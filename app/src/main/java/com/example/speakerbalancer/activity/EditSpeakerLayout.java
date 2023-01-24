@@ -1,5 +1,6 @@
 package com.example.speakerbalancer.activity;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -155,7 +156,16 @@ public class EditSpeakerLayout extends EditConfiguration {
     }
 
     private void resetAllSpeakerPositions() {
-        for (int i = 0; i < config.getSystemType().getAmount(); i++) resetSpeakerPosition(i);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditSpeakerLayout.this);
+        alertDialogBuilder.setTitle(getString(R.string.resetAllSpeakerPositions));
+        alertDialogBuilder.setMessage(getString(R.string.resetAllSpeakerPositionsDesc));
+        alertDialogBuilder.setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+            for (int i = 0; i < config.getSystemType().getAmount(); i++) resetSpeakerPosition(i);
+            Toast.makeText(this, getString(R.string.positionsReset), Toast.LENGTH_SHORT).show();
+        });
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void saveLayout() {
