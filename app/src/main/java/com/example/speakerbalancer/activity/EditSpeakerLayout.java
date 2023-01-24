@@ -137,6 +137,7 @@ public class EditSpeakerLayout extends EditConfiguration {
         set.centerHorizontally(speaker + 101, speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, bias);
         set.applyTo(speakerBorder);
         unsavedConfig.xBiases[speaker] = bias;
+        if (speaker == this.speaker) seekBarX.setProgress((int) (bias * 100));
     }
 
     private void changeSpeakerYBias(int speaker, float bias) {
@@ -145,6 +146,7 @@ public class EditSpeakerLayout extends EditConfiguration {
         set.centerVertically(speaker + 101, speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, bias);
         set.applyTo(speakerBorder);
         unsavedConfig.yBiases[speaker] = bias;
+        if (speaker == this.speaker) seekBarY.setProgress((int) (bias * 100));
     }
 
     private void resetSpeakerPosition(int speaker) {

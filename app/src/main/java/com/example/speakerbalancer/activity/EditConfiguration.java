@@ -122,7 +122,7 @@ public class EditConfiguration extends AppCompatActivity {
         // X Can click speaker to select (use OnClick event?)
         // X Selected speaker slightly changes color
         // - Reset all speaker positions confirmation
-        // - Resetting speaker position should reset X/Y slider
+        // X Resetting speaker position should reset X/Y slider
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
     }
