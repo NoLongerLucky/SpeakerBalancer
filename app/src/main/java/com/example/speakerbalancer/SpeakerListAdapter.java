@@ -52,7 +52,7 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
                 position
         ));
         holder.editInfo.setOnClickListener(view -> editItemClickListener.onSpeakerEdit(
-                list.get(position)
+                position
         ));
     }
 
@@ -87,6 +87,6 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     }
 
     public interface EditItemClickListener {
-        void onSpeakerEdit(Speaker speaker);
+        void onSpeakerEdit(int position);
     }
 }

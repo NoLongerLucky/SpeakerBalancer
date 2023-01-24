@@ -45,6 +45,36 @@ public class SpeakerSystem {
         this.speakers = speakers;
     }
 
+    public String[] getNames() {
+        String[] arr = new String[speakers.length];
+        for (int i = 0; i < speakers.length; i++) arr[i] = speakers[i].getName();
+        return arr;
+    }
+
+    public void setNames(String[] names) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].setName(names[i]);
+    }
+
+    public int[] getMinRanges() {
+        int[] arr = new int[speakers.length];
+        for (int i = 0; i < speakers.length; i++) arr[i] = speakers[i].getMinRange();
+        return arr;
+    }
+
+    public void setMinRanges(int[] minRanges) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].setMinRange(minRanges[i]);
+    }
+
+    public int[] getMaxRanges() {
+        int[] arr = new int[speakers.length];
+        for (int i = 0; i < speakers.length; i++) arr[i] = speakers[i].getMaxRange();
+        return arr;
+    }
+
+    public void setMaxRanges(int[] maxRanges) {
+        for (int i = 0; i < speakers.length; i++) speakers[i].setMaxRange(maxRanges[i]);
+    }
+
     public float[] getXBiases() {
         float[] arr = new float[speakers.length];
         for (int i = 0; i < speakers.length; i++) arr[i] = speakers[i].getXBias();

@@ -49,4 +49,8 @@
     <string name="resetAllSpeakerPositions">Reset All Speaker Positions</string>
     <string name="resetAllSpeakerPositionsDesc">This will reset all speakers to their default positions. Are you sure you would like to continue?</string>
     <string name="positionsReset">Positions reset</string>
+    <string name="minRange">Min. Range</string>
+    <string name="maxRange">Max. Range</string>
+    <string name="minRangeHz">Min. Range (hz)</string>
+    <string name="maxRangeHz">Max. Range (hz)</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.speakerbalancer.activity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class EditSpeakerLayout extends EditConfiguration {
-    TempConfig unsavedConfig;
+    public static TempConfig unsavedConfig;
     SeekBar seekBarX, seekBarY;
     TextView selected, positionX, positionY;
     RecyclerView speakerList;
@@ -124,10 +125,7 @@ public class EditSpeakerLayout extends EditConfiguration {
 
     private void createSpeakerList() {
         List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
-        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, this::selectSpeaker, this::resetSpeakerPosition, (speaker) -> {
-            selected.setText(getString(R.string.editingSpeaker, speaker.getName(), speaker.getChannel().getId()));
-            if (previousButton != null) previousButton.setEnabled(true);
-        }));
+        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, this::selectSpeaker, this::resetSpeakerPosition, this::editSpeakerInfo));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         speakerList.setNestedScrollingEnabled(false);
     }
@@ -166,6 +164,12 @@ public class EditSpeakerLayout extends EditConfiguration {
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {});
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void editSpeakerInfo(int position) {
+        Intent i = new Intent(this, EditSpeakerInfo.class);
+        i.putExtra("position", position);
+        startActivity(i);
     }
 
     private void saveLayout() {

@@ -118,11 +118,13 @@ public class EditConfiguration extends AppCompatActivity {
         // X Fix LFE showing in speaker list even when removed
         // X Display list of speakers on EditSpeakerLayout activity in a table
         // X Above list has a button for each entry, selecting it allows speaker to be moved
-        // - Above list also allows editing each speaker's individual traits
+        // X Above list also allows editing each speaker's individual traits
         // X Can click speaker to select (use OnClick event?)
         // X Selected speaker slightly changes color
         // X Reset all speaker positions confirmation
         // X Resetting speaker position should reset X/Y slider
+        // - Convert speaker/system types to enums
+        // - Prevent back buttons if unsaved changes exist
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
     }
