@@ -103,6 +103,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     protected void onResume() {
         super.onResume();
         createSpeakerList();
+        highlight(speaker);
     }
 
     protected void boxClickListener(int id) {
@@ -115,18 +116,24 @@ public class EditSpeakerLayout extends EditConfiguration {
 
     private void selectSpeaker(Speaker speaker, Button button, int position) {
         selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
-        if (this.speaker >= 0) {
-            findViewById(this.speaker + 101).setBackgroundColor(Color.parseColor("#000000"));
-            ((TextView) findViewById(this.speaker + 201)).setTextColor(Color.parseColor("#FFFFFF"));
-        }
+        highlight(position);
         (previousButton == null ? button : previousButton).setEnabled(true);
         button.setEnabled(false);
         previousButton = button;
         this.speaker = position;
         seekBarX.setProgress((int) (unsavedConfig.xBiases[position] * 100));
         seekBarY.setProgress((int) (unsavedConfig.yBiases[position] * 100));
-        findViewById(this.speaker + 101).setBackgroundColor(Color.parseColor("#FFFFFF"));
-        ((TextView) findViewById(this.speaker + 201)).setTextColor(Color.parseColor("#000000"));
+    }
+
+    private void highlight(int select) {
+        if (speaker >= 0) {
+            findViewById(speaker + 101).setBackgroundColor(Color.parseColor("#000000"));
+            ((TextView) findViewById(speaker + 201)).setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        if (select >= 0) {
+            findViewById(select + 101).setBackgroundColor(Color.parseColor("#FFFFFF"));
+            ((TextView) findViewById(select + 201)).setTextColor(Color.parseColor("#000000"));
+        }
     }
 
     private void createSpeakerList() {
