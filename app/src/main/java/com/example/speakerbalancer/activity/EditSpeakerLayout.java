@@ -106,6 +106,14 @@ public class EditSpeakerLayout extends EditConfiguration {
         highlight(speaker);
     }
 
+    protected float xBias(int id) {
+        return unsavedConfig.xBiases[id];
+    }
+
+    protected float yBias(int id) {
+        return unsavedConfig.yBiases[id];
+    }
+
     protected void boxClickListener(int id) {
         id -= 101;
         Speaker speaker = config.getSystemType().getSpeakers()[id];

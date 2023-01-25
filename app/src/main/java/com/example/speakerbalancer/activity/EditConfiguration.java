@@ -149,14 +149,22 @@ public class EditConfiguration extends AppCompatActivity {
 
         ConstraintSet set = new ConstraintSet();
         set.clone(speakerBorder);
-        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, config.getSystemType().getSpeakers()[index].getXBias());
-        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, config.getSystemType().getSpeakers()[index].getYBias());
+        set.centerHorizontally(box.getId(), speakerBorder.getId(), ConstraintSet.LEFT, 0, speakerBorder.getId(), ConstraintSet.RIGHT, 0, xBias(index));
+        set.centerVertically(box.getId(), speakerBorder.getId(), ConstraintSet.TOP, 0, speakerBorder.getId(), ConstraintSet.BOTTOM, 0, yBias(index));
         set.centerHorizontally(text.getId(), box.getId(), ConstraintSet.LEFT, 0, box.getId(), ConstraintSet.RIGHT, 0, 0.5F);
         set.centerVertically(text.getId(), box.getId(), ConstraintSet.TOP, 0, box.getId(), ConstraintSet.BOTTOM, 0, 0.5F);
         set.applyTo(speakerBorder);
 
         speakerBorder.bringToFront();
         findViewById(201 + index).bringToFront();
+    }
+
+    protected float xBias(int id) {
+        return config.getSystemType().getSpeakers()[id].getXBias();
+    }
+
+    protected float yBias(int id) {
+        return config.getSystemType().getSpeakers()[id].getYBias();
     }
 
     protected void boxClickListener(int id) { }
