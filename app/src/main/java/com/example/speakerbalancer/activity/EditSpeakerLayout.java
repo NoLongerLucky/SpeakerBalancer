@@ -99,6 +99,12 @@ public class EditSpeakerLayout extends EditConfiguration {
         setContentView(R.layout.activity_edit_speaker_layout);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        createSpeakerList();
+    }
+
     protected void boxClickListener(int id) {
         id -= 101;
         Speaker speaker = config.getSystemType().getSpeakers()[id];
@@ -125,7 +131,7 @@ public class EditSpeakerLayout extends EditConfiguration {
 
     private void createSpeakerList() {
         List<Speaker> list = Arrays.asList(config.getSystemType().getSpeakers());
-        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, this::selectSpeaker, this::resetSpeakerPosition, this::editSpeakerInfo));
+        speakerList.setAdapter(new SpeakerListAdapter(getApplicationContext(), list, unsavedConfig, this::selectSpeaker, this::resetSpeakerPosition, this::editSpeakerInfo));
         speakerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         speakerList.setNestedScrollingEnabled(false);
     }

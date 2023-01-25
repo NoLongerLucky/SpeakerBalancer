@@ -123,7 +123,7 @@ public class EditConfiguration extends AppCompatActivity {
         // X Selected speaker slightly changes color
         // X Reset all speaker positions confirmation
         // X Resetting speaker position should reset X/Y slider
-        // - Fix HUD not updating with edited speaker info
+        // X Fix HUD not updating with edited speaker info
         // - Fix boxes not being drawn correctly when resuming EditSpeakerLayout
         // - Convert speaker/system types to enums
         // - Prevent back buttons if unsaved changes exist

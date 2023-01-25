@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.speakerbalancer.data.TempConfig;
 import com.example.speakerbalancer.speakers.Speaker;
 
 import java.util.List;
@@ -18,13 +19,15 @@ import java.util.List;
 public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.ViewHolder> {
     Context context;
     List<Speaker> list;
+    TempConfig unsavedConfig;
     MoveItemClickListener moveItemClickListener;
     ResetItemPosClickListener resetItemClickListener;
     EditItemClickListener editItemClickListener;
 
-    public SpeakerListAdapter(Context context, List<Speaker> list, MoveItemClickListener moveItemClickListener, ResetItemPosClickListener resetItemClickListener, EditItemClickListener editItemClickListener) {
+    public SpeakerListAdapter(Context context, List<Speaker> list, TempConfig unsavedConfig, MoveItemClickListener moveItemClickListener, ResetItemPosClickListener resetItemClickListener, EditItemClickListener editItemClickListener) {
         this.context = context;
         this.list = list;
+        this.unsavedConfig = unsavedConfig;
         this.moveItemClickListener = moveItemClickListener;
         this.resetItemClickListener = resetItemClickListener;
         this.editItemClickListener = editItemClickListener;
@@ -40,7 +43,7 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     public void onBindViewHolder(@NonNull SpeakerListAdapter.ViewHolder holder, final int position) {
         holder.speakerImage.setImageResource(list.get(position).getImageId());
 
-        holder.speakerName.setText(list.get(position).getName());
+        holder.speakerName.setText(unsavedConfig.names[position]);
         holder.speakerId.setText(list.get(position).getChannel().getId());
 
         holder.move.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
