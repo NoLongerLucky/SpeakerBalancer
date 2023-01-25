@@ -102,8 +102,11 @@ public class EditSpeakerLayout extends EditConfiguration {
     @Override
     protected void onResume() {
         super.onResume();
-        createSpeakerList();
         highlight(speaker);
+        for (int i = 0; i < speakerList.getChildCount(); i++) {
+            TextView text = speakerList.getChildAt(i).findViewById(R.id.speakerName);
+            text.setText(unsavedConfig.names[i]);
+        }
     }
 
     protected float xBias(int id) {
