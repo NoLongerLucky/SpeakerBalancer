@@ -38,7 +38,7 @@
     <string name="tweeter">Tweeter</string>
     <string name="noSpeakerSelected">No speaker selected</string>
     <string name="_0_0">0.0</string>
-    <string name="movingSpeaker">Moving %1$s %2$s</string>
+    <string name="movingSpeaker">Moving %1$s</string>
     <string name="editingSpeaker">Editing %1$s %2$s</string>
     <string name="nameDisplay">Name: %1$s</string>
     <string name="systemTypeDisplay">System Type: %1$s</string>

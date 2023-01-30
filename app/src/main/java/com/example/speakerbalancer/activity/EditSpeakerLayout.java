@@ -107,6 +107,7 @@ public class EditSpeakerLayout extends EditConfiguration {
             TextView text = speakerList.getChildAt(i).findViewById(R.id.infoLine1);
             text.setText(unsavedConfig.line1(i, config.getSystemType().getSpeakers()[i].getChannel().getId()));
         }
+        if (speaker >= 0) selected.setText(getString(R.string.movingSpeaker, unsavedConfig.line1(speaker, config.getSystemType().getSpeakers()[speaker].getChannel().getId())));
     }
 
     protected float xBias(int id) {
@@ -126,7 +127,7 @@ public class EditSpeakerLayout extends EditConfiguration {
     }
 
     private void selectSpeaker(Speaker speaker, Button button, int position) {
-        selected.setText(getString(R.string.movingSpeaker, speaker.getName(), speaker.getChannel().getId()));
+        selected.setText(getString(R.string.movingSpeaker, unsavedConfig.line1(position, speaker.getChannel().getId())));
         highlight(position);
         (previousButton == null ? button : previousButton).setEnabled(true);
         button.setEnabled(false);
