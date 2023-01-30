@@ -98,37 +98,6 @@ public class EditConfiguration extends AppCompatActivity {
         topWall.setBackgroundColor(config.getWallMaterial().getColor());
         bottomWall.setBackgroundColor(config.getWallMaterial().getColor());
 
-        // Bad code, just a proof of concept
-        // TO-DO:
-        // X Set up abstract class for Speaker data type
-        // X Create specific speaker classes that extend Speaker abstract class
-        // X Improve system type logic
-        //  X Make it easier to add new system types
-        //  X Update layouts
-        //  X Update all necessary variables
-        //  X Creating new layout creates array of all speakers
-        //  X Updating speaker types re-initializes the array
-        // X Have different representations for each type of speaker
-        // X Make speakers movable
-        //  X Fix bug where they reset position when selected again
-        //  X Fix bug where position display doesn't always update correctly
-        //  X Add button to reset position(s)
-        // X Finalize as many StoredConfig attributes as possible
-        // X Save speaker positions to database
-        // X Fix LFE showing in speaker list even when removed
-        // X Display list of speakers on EditSpeakerLayout activity in a table
-        // X Above list has a button for each entry, selecting it allows speaker to be moved
-        // X Above list also allows editing each speaker's individual traits
-        // X Can click speaker to select (use OnClick event?)
-        // X Selected speaker slightly changes color
-        // X Reset all speaker positions confirmation
-        // X Resetting speaker position should reset X/Y slider
-        // X Fix HUD not updating with edited speaker info
-        // X Fix selected box not being highlighted when resuming EditSpeakerLayout
-        // X Fix moved speaker being drawn in previous location when resuming EditSpeakerLayout
-        // X Fix selected speaker's move button not being disabled when resuming EditSpeakerLayout
-        // X Display for selected speaker should update name when resuming EditSpeakerLayout
-        // X Change rv_speaker_list.xml format (e.g. Tweeter (FL); 2000 - 20000)
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);
     }
