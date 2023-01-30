@@ -104,8 +104,8 @@ public class EditSpeakerLayout extends EditConfiguration {
         super.onResume();
         highlight(speaker);
         for (int i = 0; i < speakerList.getChildCount(); i++) {
-            TextView text = speakerList.getChildAt(i).findViewById(R.id.speakerName);
-            text.setText(unsavedConfig.names[i]);
+            TextView text = speakerList.getChildAt(i).findViewById(R.id.infoLine1);
+            text.setText(unsavedConfig.line1(i, config.getSystemType().getSpeakers()[i].getChannel().getId()));
         }
     }
 

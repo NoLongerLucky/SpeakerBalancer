@@ -25,4 +25,12 @@ public class TempConfig {
         config.getSystemType().setYBiases(yBiases);
         return config;
     }
+
+    public String line1(int index, String id) {
+        return names[index] + " (" + id + ")";
+    }
+
+    public String line2(int index) {
+        return minRanges[index] + " Hz - " + maxRanges[index] + " Hz";
+    }
 }

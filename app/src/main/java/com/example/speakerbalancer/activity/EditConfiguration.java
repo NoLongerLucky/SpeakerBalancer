@@ -128,8 +128,7 @@ public class EditConfiguration extends AppCompatActivity {
         // X Fix moved speaker being drawn in previous location when resuming EditSpeakerLayout
         // X Fix selected speaker's move button not being disabled when resuming EditSpeakerLayout
         // - Display for selected speaker should update name when resuming EditSpeakerLayout
-        // - Change rv_speaker_list.xml format (e.g. Tweeter (FL); 2000 - 20000)
-        // - Convert speaker/system types to enums
+        // X Change rv_speaker_list.xml format (e.g. Tweeter (FL); 2000 - 20000)
         // - Prevent back buttons if unsaved changes exist
         speakerBorder.removeAllViewsInLayout();
         for (int i = 0; i < config.getSystemType().getAmount(); i++) createSpeakerBox(i);

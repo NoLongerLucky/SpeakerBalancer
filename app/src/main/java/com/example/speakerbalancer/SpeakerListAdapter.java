@@ -43,8 +43,8 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
     public void onBindViewHolder(@NonNull SpeakerListAdapter.ViewHolder holder, final int position) {
         holder.speakerImage.setImageResource(list.get(position).getImageId());
 
-        holder.speakerName.setText(unsavedConfig.names[position]);
-        holder.speakerId.setText(list.get(position).getChannel().getId());
+        holder.infoLine1.setText(unsavedConfig.line1(position, list.get(position).getChannel().getId()));
+        holder.infoLine2.setText(unsavedConfig.line2(position));
 
         holder.move.setOnClickListener(view -> moveItemClickListener.onSpeakerMove(
                 list.get(position),
@@ -66,15 +66,15 @@ public class SpeakerListAdapter extends RecyclerView.Adapter<SpeakerListAdapter.
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView speakerImage;
-        TextView speakerName, speakerId;
+        TextView infoLine1, infoLine2;
         Button move, resetPosition, editInfo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             speakerImage = itemView.findViewById(R.id.speakerImage);
-            speakerName = itemView.findViewById(R.id.speakerName);
-            speakerId = itemView.findViewById(R.id.speakerId);
+            infoLine1 = itemView.findViewById(R.id.infoLine1);
+            infoLine2 = itemView.findViewById(R.id.infoLine2);
             move = itemView.findViewById(R.id.move);
             resetPosition = itemView.findViewById(R.id.resetPosition);
             editInfo = itemView.findViewById(R.id.editInfo);
